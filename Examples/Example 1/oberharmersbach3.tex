@@ -1,0 +1,1981 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\useinnertheme[shadow=true]{rounded}
+\usepackage[T1]{fontenc}
+\newcommand\mybeamerthm[2]{%
+  \newtheorem*{#1}{#2}%
+  \AtBeginEnvironment{#1}{%
+     \setbeamercolor{block body}{fg=black,bg=blue!5}%
+  }%
+}
+
+\newcommand\mybeamerex[2]{%
+  \newtheorem*{#1}{#2}%
+  \AtBeginEnvironment{#1}{%
+     \setbeamercolor{block body}{fg=black,bg=green!5}%
+     \setbeamercolor{block title}{fg=white,bg=green!65!black}%
+  }%
+}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor} %no
+%\usetheme{Antibes}
+%\usetheme{Bergen} %no
+%\usetheme{Berkeley} %no
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc,shapes.multipart,patterns,decorations.pathreplacing,intersections, decorations.pathmorphing}
+
+\usepackage{wrapfig}
+
+\usepackage[small,nohug,heads=littlevee]{diagrams}
+\diagramstyle[labelstyle=\scriptstyle]
+
+\usepackage{pgfplots}
+
+\definecolor{light-gray}{gray}{0.8}
+
+\usepackage{scalefnt}
+\usepackage{etoolbox}
+\usepackage{ragged2e}
+
+\apptocmd{\frame}{}{\justifying}{} % Allow optional arguments after frame.
+
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\spf}{spf}
+\DeclareMathOperator{\codim}{codim}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\bb}{\mathbb}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\rel}[1]{|_{#1}}
+
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{The $\eta$ invariant under cone-edge degeneration} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Nelvis Fornasin} % Your name
+\institute[ALU] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Albert-Ludwig-Universit\"at Freiburg  \\ % Your institution for the title page
+\medskip
+%\textit{john@smith.com} % Your email address
+}
+\date{\quad} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{The $\eta$ invariant under cone-edge degeneration} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+%\section{Introduction} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%------------------------------------------------
+
+
+%------------------------------------------------
+
+\section{Introduction}
+%\subsection*{The $\eta$ invariant}
+\begin{frame}
+\frametitle{The $\eta$ invariant}
+Let $(M^n,g)$ be a spin manifold. We will consider two operators:
+\begin{itemize}
+\item The Hodge operator $d+d^*$ acting on forms;
+\item The spin Dirac operator acting on spinors.
+\end{itemize}
+Let $D$ be either of these operators\footnote{Assume that $D$ is (essentially) self adjoint.}. Then
+\[
+\eta(D):=\int_0^\infty\frac{\tr De^{-tD^2}}{\sqrt{\pi t}}dt=\int_0^\infty\frac{\sum_{i=0}^\infty\lambda_i e^{-t\lambda_i^2}}{\sqrt{\pi t}}dt
+\]
+Here:
+\begin{itemize}
+\item $e^{-tD^2}$ is the \emph{heat kernel} of $D$, acting on the same bundle as $D$;
+\item $\{\lambda_i\}_{i\in\bb N}$ is the set of eigenvalues of $D$;
+\item $\tr De^{-tD^2}=\sum_{i=0}^\infty\lambda_i e^{-t\lambda_i^2}$.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{The $\eta$ invariant}
+\begin{alertblock}{Takeaway 1}
+There exist two equivalent theories for treating the $\eta$ invariant: microlocal analysis and spectral theory.
+\be
+\eta(D):=\underbrace{\int_0^\infty\frac{\tr De^{-tD^2}}{\sqrt{\pi t}}dt}_{\text{Microlocal analysis}}=\underbrace{\int_0^\infty\frac{\sum_{i=0}^\infty\lambda_i e^{-t\lambda_i^2}}{\sqrt{\pi t}}dt}_{\text{Spectral theory}}
+\ee
+\end{alertblock}
+Both are important for my thesis. Following Sher [S15], I split $\eta(D)$ in two summands and treat each of them in the most convenient framework:
+\[
+\eta(D)=\underbrace{\int_0^1\frac{\tr De^{-tD^2}}{\sqrt{\pi t}}dt}_{\text{Short time component}}+\underbrace{\int_1^\infty\frac{\sum_{i=0}^\infty\lambda_i e^{-t\lambda_i^2}}{\sqrt{\pi t}}dt}_{\text{Long time component}}
+\]
+\end{frame}
+
+%------------------------------------------------
+
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Conic degeneration}
+Use surgery to resolve a conic singularity:
+
+\begin{figure}[H]
+{\scalefont{0.75}
+\begin{center}
+\begin{tikzpicture}[scale=0.15]
+\draw (0,10) to (5,0);
+\draw (5,0) to (10,10);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (3,4) to [out = -20, in = -160] (7,4);
+\draw [gray, dashed] (3,4) to [out = 20, in = 160] (7,4);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (-2,0) to (-2,18);
+\node [below left] at (-2.5,18) {$\rho$};
+\draw (-2,10) to (-2.5,10);
+\node [left] at (-2.5,0) {$0$};
+\node [left] at (-2.5,10) {$1$};
+\draw (-2,4) to (-2.5,4);
+\node [left] at (-2.5,4) {$\varepsilon$};
+\node [below left, draw] at (13,2) {$\Omega_0$};
+%\draw (-2,16) to (-2.5,16);
+%\node [left] at (-2.5,16) {$2$};
+
+\node (A) at (15,8) {\large{$+$}};
+
+\node (B) [right=-3mm of A] {
+\begin{tikzpicture}[scale=0.225]
+\draw (20,10) to (23,4);
+\draw (30,10) to (27,4);
+\draw [gray] (20,10) to [out = -20, in = -160] (30,10);
+\draw [gray, dashed] (20,10) to [out = 20, in = 160] (30,10);
+\draw [gray] (23,4) to [out = -20, in = -160] (27,4);
+\draw [gray, dashed] (23,4) to [out = 20, in = 160] (27,4);
+\draw (20,10) to (19.5,11);
+\draw [dotted] (19.5,11) to (18.5,13);
+\draw (30,10) to (30.5,11);
+\draw [dotted] (30.5,11) to (31.5,13);
+\draw (23,4) to [out=-60,in=180](25,0);
+\draw (27,4) to [out=-120,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\draw[|->] (32,0) to (32,15);
+\node [below right] at (32.5,15) {$x$};
+\draw (32,10) to (32.5,10);
+\node [right] at (32.5,0) {$0$};
+\node [right] at (32.5,10) {$\frac{1}{\varepsilon}$};
+\draw (32,4) to (32.5,4);
+\node [right] at (32.5,4) {$1$};
+\node [draw] at (28,2) {$Z$};
+\end{tikzpicture}
+};
+
+\node (C) [right=0mm of B] {
+\begin{tikzpicture}[scale=0.15]
+\node at (38,8) {\large{$=$}};
+
+\begin{scope}[shift = {(42,0)}]
+\draw (0,10) to (3,4);
+\draw (10,10) to (7,4);
+\draw (3,4) to [out=-60,in=180](5,0);
+\draw (7,4) to [out=-120,in=0](5,0);
+\draw (5,3) to [out =-120,in=120] (5,1.75);
+\draw (4.9,2.7) to [out =-60,in=60] (4.9,2.05);
+\draw (5,1.75) to [out =-60,in=60] (5,0.5);
+\draw (5.1,1.45) to [out =-120,in=120] (5.1,0.8);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (3,4) to [out = -20, in = -160] (7,4);
+\draw [gray, dashed] (3,4) to [out = 20, in = 160] (7,4);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (12,0) to (12,18);
+\node [below right] at (12.5,18) {$\rho$};
+\draw (12,10) to (12.5,10);
+\node [right] at (12.5,0) {$0$};
+\node [right] at (12.5,10) {$1$};
+\draw (12,4) to (12.5,4);
+\node [right] at (12.5,4) {$\varepsilon$};
+\node [draw] at (-3,2) {$\Omega_\varepsilon$};
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+\end{scope}
+\end{tikzpicture}
+};
+\end{tikzpicture}
+\end{center}
+}
+\end{figure}
+
+\begin{exampleblock}{Comments}
+\justifying
+$\{\rho=0\}\subseteq\Omega_0$ is the \emph{singular set}. In this case $ S=\{pt\}$.\par
+$\Omega_0$ has a \emph{conic singularity} at $p$ iff in a neighbourhood of $p$ it is isometric to the cone $(C(Y),d\rho^2+\rho^2h)$, where $(Y,h)$ is a smooth Riemannian manifold. $(Y,h)$ is called \emph{link}.
+\end{exampleblock}
+
+\end{frame}
+
+
+%------------------------------------------------
+
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Conic degeneration}
+Use surgery to resolve a conic singularity:
+
+\begin{figure}[H]
+{\scalefont{0.75}
+\begin{center}
+\begin{tikzpicture}[scale=0.15]
+\draw (0,10) to (5,0);
+\draw (5,0) to (10,10);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (3,4) to [out = -20, in = -160] (7,4);
+\draw [gray, dashed] (3,4) to [out = 20, in = 160] (7,4);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (-2,0) to (-2,18);
+\node [below left] at (-2.5,18) {$\rho$};
+\draw (-2,10) to (-2.5,10);
+\node [left] at (-2.5,0) {$0$};
+\node [left] at (-2.5,10) {$1$};
+\draw (-2,4) to (-2.5,4);
+\node [left] at (-2.5,4) {$\varepsilon$};
+\node [below left, draw] at (13,2) {$\Omega_0$};
+%\draw (-2,16) to (-2.5,16);
+%\node [left] at (-2.5,16) {$2$};
+
+\node (A) at (15,8) {\large{$+$}};
+
+\node (B) [right=-3mm of A] {
+\begin{tikzpicture}[scale=0.225]
+\draw (20,10) to (23,4);
+\draw (30,10) to (27,4);
+\draw [gray] (20,10) to [out = -20, in = -160] (30,10);
+\draw [gray, dashed] (20,10) to [out = 20, in = 160] (30,10);
+\draw [gray] (23,4) to [out = -20, in = -160] (27,4);
+\draw [gray, dashed] (23,4) to [out = 20, in = 160] (27,4);
+\draw (20,10) to (19.5,11);
+\draw [dotted] (19.5,11) to (18.5,13);
+\draw (30,10) to (30.5,11);
+\draw [dotted] (30.5,11) to (31.5,13);
+\draw (23,4) to [out=-60,in=180](25,0);
+\draw (27,4) to [out=-120,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\draw[|->] (32,0) to (32,15);
+\node [below right] at (32.5,15) {$x$};
+\draw (32,10) to (32.5,10);
+\node [right] at (32.5,0) {$0$};
+\node [right] at (32.5,10) {$\frac{1}{\varepsilon}$};
+\draw (32,4) to (32.5,4);
+\node [right] at (32.5,4) {$1$};
+\node [draw] at (28,2) {$Z$};
+\end{tikzpicture}
+};
+
+\node (C) [right=0mm of B] {
+\begin{tikzpicture}[scale=0.15]
+\node at (38,8) {\large{$=$}};
+
+\begin{scope}[shift = {(42,0)}]
+\draw (0,10) to (3,4);
+\draw (10,10) to (7,4);
+\draw (3,4) to [out=-60,in=180](5,0);
+\draw (7,4) to [out=-120,in=0](5,0);
+\draw (5,3) to [out =-120,in=120] (5,1.75);
+\draw (4.9,2.7) to [out =-60,in=60] (4.9,2.05);
+\draw (5,1.75) to [out =-60,in=60] (5,0.5);
+\draw (5.1,1.45) to [out =-120,in=120] (5.1,0.8);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (3,4) to [out = -20, in = -160] (7,4);
+\draw [gray, dashed] (3,4) to [out = 20, in = 160] (7,4);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (12,0) to (12,18);
+\node [below right] at (12.5,18) {$\rho$};
+\draw (12,10) to (12.5,10);
+\node [right] at (12.5,0) {$0$};
+\node [right] at (12.5,10) {$1$};
+\draw (12,4) to (12.5,4);
+\node [right] at (12.5,4) {$\varepsilon$};
+\node [draw] at (-3,2) {$\Omega_\varepsilon$};
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+\end{scope}
+\end{tikzpicture}
+};
+\end{tikzpicture}
+\end{center}
+}
+\end{figure}
+
+As $\varepsilon \to 0$, $\Omega_\varepsilon$ degenerates to $\Omega_0$:
+
+\begin{figure}[H]
+\begin{center}
+{\scalefont{0.5}
+\begin{tikzpicture}[scale=0.1]
+\draw (0,10) to (3,4);
+\draw (10,10) to (7,4);
+\draw (3,4) to [out=-60,in=180](5,0);
+\draw (7,4) to [out=-120,in=0](5,0);
+\draw (5,3) to [out =-120,in=120] (5,1.75);
+\draw (4.9,2.8) to [out =-60,in=60] (4.9,1.9);
+\draw (5,1.75) to [out =-60,in=60] (5,0.5);
+\draw (5.1,1.6) to [out =-120,in=120] (5.1,0.7);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (3,4) to [out = -20, in = -160] (7,4);
+\draw [gray, dashed] (3,4) to [out = 20, in = 160] (7,4);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+
+
+\node at (15,8) {\large{$\dots$}};
+\begin{scope}[shift = {(20,0)}]
+\draw (0,10) to (3.5,3);
+\draw (10,10) to (6.5,3);
+\draw (3.5,3) to [out=-60,in=180](5,0);
+\draw (6.5,3) to [out=-120,in=0](5,0);
+\draw (5,2) to [out =-120,in=120] (5,1.5);
+\draw (4.9,1.85) to [out =-60,in=60] (4.9,1.45);
+\draw (5,1.5) to [out =-60,in=60] (5,0.5);
+\draw (5.1,1.1) to [out =-120,in=120] (5.1,0.7);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (3.5,3) to [out = -20, in = -160] (6.5,3);
+\draw [gray, dashed] (3.5,3) to [out = 20, in = 160] (6.5,3);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\end{scope}
+
+\node at (36,8) {\large{$\dots$}};
+
+\begin{scope}[shift = {(40,0)}]
+\draw (0,10) to (4,2);
+\draw (10,10) to (6,2);
+\draw (4,2) to [out=-60,in=180](5,0);
+\draw (6,2) to [out=-120,in=0](5,0);
+\draw (5,1) to [out =-120,in=120] (5,0.75);
+\draw (4.9,0.7) to [out =-60,in=60] (4.9,1.05);
+\draw (5,0.75) to [out =-60,in=60] (5,0.5);
+\draw (5.1,0.45) to [out =-120,in=120] (5.1,0.8);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (4,2) to [out = -20, in = -160] (6,2);
+\draw [gray, dashed] (4,2) to [out = 20, in = 160] (6,2);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\end{scope}
+
+\node at (56,8) {\large{$\dots$}};
+
+\begin{scope}[shift = {(60,0)}]
+\draw (0,10) to (5,0);
+\draw (10,10) to (5,0);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\end{scope}
+
+\end{tikzpicture}
+}
+
+\label{pic}
+\end{center}
+\end{figure}
+
+\end{frame}
+%------------------------------------------------
+
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Cone-edge degeneration}
+Use surgery to resolve a cone-edge singularity:
+
+\begin{figure}[H]
+\begin{center}
+{\scalefont{0.75}
+\begin{tikzpicture}[scale=0.15]
+
+\draw [gray] (2,4) to [out = -20, in = -160] (6-2,4);
+\draw [gray, dashed] (2,4) to [out = 20, in = 160] (6-2,4);
+
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (3,1);
+\draw (3,1) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\node at (5,5) {\tiny{$\times$}};
+
+\draw [gray] (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [densely dashed, gray] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (-2,1) to (-2,18);
+\node [below left] at (-2.5,18) {$\rho$};
+\draw (-2,10) to (-2.5,10);
+\node [left] at (-2.5,1) {$0$};
+\node [left] at (-2.5,10) {$1$};
+\draw (-2,4) to (-2.5,4);
+\node [left] at (-2.5,4) {$\varepsilon$};
+\node [below left, draw] at (13,2) {$\Omega_0$};
+%\draw (-2,16) to (-2.5,16);
+%\node [left] at (-2.5,16) {$2$};
+
+\node (A) at (15,8) {\large{$+$}};
+
+\node (B) [right=-3mm of A] {
+\begin{tikzpicture}[scale=0.225]
+\draw (23-1.8,10) to (23,4);
+\draw (27+1.8,10) to (27,4);
+\draw [gray] (23-1.8,10) to [out = -20, in = -160] (27+1.8,10);
+\draw [gray, dashed] (23-1.8,10) to [out = 20, in = 160] (27+1.8,10);
+\draw [gray] (23,4) to [out = -20, in = -160] (27,4);
+\draw [gray, dashed] (23,4) to [out = 20, in = 160] (27,4);
+\draw (23-1.8,10) to (23-2.1,11);
+\draw [dotted] (23-2.1,11) to (23-2.7,13);
+\draw (27+1.8,10) to (27+2.1,11);
+\draw [dotted] (27+2.1,11) to (27+2.7,13);
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\draw[|->] (32,0) to (32,15);
+\node [below right] at (32.5,15) {$x$};
+\draw (32,10) to (32.5,10);
+\node [right] at (32.5,0) {$0$};
+\node [right] at (32.5,10) {$\frac{1}{\varepsilon}$};
+\draw (32,4) to (32.5,4);
+\node [right] at (32.5,4) {$1$};
+\node [draw] at (28,2) {$Z$};
+\end{tikzpicture}
+};
+
+\node (C) [right=0mm of B] {
+\begin{tikzpicture}[scale=0.15]
+\node at (38,8) {\large{$=$}};
+
+\begin{scope}[shift = {(42,0)}]
+
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (1.833,4) ;
+\draw (6-1.833,4) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\draw [gray] (1.833,4) to [out = -20, in = -160] (6-1.833,4);
+\draw [gray, dashed] (1.833,4) to [out = 20, in = 160] (6-1.833,4);
+
+\node at (3.6,4.9) {\tiny{$\times$}};
+
+\draw [gray] (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [gray, densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (12,1) to (12,18);
+\node [below right] at (12.5,18) {$\rho$};
+\draw (12,10) to (12.5,10);
+\node [right] at (12.5,1) {$0$};
+\node [right] at (12.5,10) {$1$};
+\draw (12,4) to (12.5,4);
+\node [right] at (12.5,4) {$\varepsilon$};
+\node [draw] at (-3,2) {$\Omega_\varepsilon$};
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+
+\begin{scope}[shift = {(-11.576,1.67)}, scale = 0.583]
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\end{scope}
+
+\end{scope}
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\end{center}
+\end{figure}
+
+\begin{exampleblock}{Comments}
+\justifying
+$\{\rho=0\}\subseteq\Omega_0$ is the \emph{singular set}. In this case $ S=(B,k)$.\par
+$\Omega_0$ has a \emph{cone-edge singularity} at $B$ iff in a neighbourhood of $B$ it is isometric to $(C(Y)\times B,d\rho^2+\rho^2h+k)$, where $(Y,h)$ and $(B,k)$ are smooth Riemannian manifolds. $(B,k)$ is called \emph{edge}.
+\end{exampleblock}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Cone-edge degeneration}
+Use surgery to resolve a cone-edge singularity:
+
+\begin{figure}[H]
+\begin{center}
+{\scalefont{0.75}
+\begin{tikzpicture}[scale=0.15]
+
+\draw [gray] (2,4) to [out = -20, in = -160] (6-2,4);
+\draw [gray, dashed] (2,4) to [out = 20, in = 160] (6-2,4);
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (3,1);
+\draw (3,1) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\node at (5,5) {\tiny{$\times$}};
+
+\draw [gray] (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [gray, densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (-2,1) to (-2,18);
+\node [below left] at (-2.5,18) {$\rho$};
+\draw (-2,10) to (-2.5,10);
+\node [left] at (-2.5,1) {$0$};
+\node [left] at (-2.5,10) {$1$};
+\draw (-2,4) to (-2.5,4);
+\node [left] at (-2.5,4) {$\varepsilon$};
+\node [below left, draw] at (13,2) {$\Omega_0$};
+%\draw (-2,16) to (-2.5,16);
+%\node [left] at (-2.5,16) {$2$};
+
+\node (A) at (15,8) {\large{$+$}};
+
+\node (B) [right=-3mm of A] {
+\begin{tikzpicture}[scale=0.225]
+\draw (23-1.8,10) to (23,4);
+\draw (27+1.8,10) to (27,4);
+\draw [gray] (23-1.8,10) to [out = -20, in = -160] (27+1.8,10);
+\draw [gray, dashed] (23-1.8,10) to [out = 20, in = 160] (27+1.8,10);
+\draw [gray] (23,4) to [out = -20, in = -160] (27,4);
+\draw [gray, dashed] (23,4) to [out = 20, in = 160] (27,4);
+\draw (23-1.8,10) to (23-2.1,11);
+\draw [dotted] (23-2.1,11) to (23-2.7,13);
+\draw (27+1.8,10) to (27+2.1,11);
+\draw [dotted] (27+2.1,11) to (27+2.7,13);
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\draw[|->] (32,0) to (32,15);
+\node [below right] at (32.5,15) {$x$};
+\draw (32,10) to (32.5,10);
+\node [right] at (32.5,0) {$0$};
+\node [right] at (32.5,10) {$\frac{1}{\varepsilon}$};
+\draw (32,4) to (32.5,4);
+\node [right] at (32.5,4) {$1$};
+\node [draw] at (28,2) {$Z$};
+\end{tikzpicture}
+};
+
+\node (C) [right=0mm of B] {
+\begin{tikzpicture}[scale=0.15]
+\node at (38,8) {\large{$=$}};
+
+\begin{scope}[shift = {(42,0)}]
+
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (1.833,4) ;
+\draw (6-1.833,4) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\draw [gray] (1.833,4) to [out = -20, in = -160] (6-1.833,4);
+\draw [gray, dashed] (1.833,4) to [out = 20, in = 160] (6-1.833,4);
+
+\node at (3.6,4.9) {\tiny{$\times$}};
+
+\draw [gray] (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [gray, densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (12,1) to (12,18);
+\node [below right] at (12.5,18) {$\rho$};
+\draw (12,10) to (12.5,10);
+\node [right] at (12.5,1) {$0$};
+\node [right] at (12.5,10) {$1$};
+\draw (12,4) to (12.5,4);
+\node [right] at (12.5,4) {$\varepsilon$};
+\node [draw] at (-3,2) {$\Omega_\varepsilon$};
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+
+\begin{scope}[shift = {(-11.576,1.67)}, scale = 0.583]
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\end{scope}
+
+\end{scope}
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\end{center}
+\end{figure}
+
+As $\varepsilon\to 0$, $\Omega_\varepsilon$ degenerates to $\Omega_0$:
+
+\begin{figure}[H]
+\begin{center}
+{\scalefont{0.5}
+\begin{tikzpicture}[scale=0.11]
+
+%first
+\begin{scope}[shift = {(0,0)}]
+
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (1.833,4) ;
+\draw (6-1.833,4) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\draw [gray] (1.833,4) to [out = -20, in = -160] (6-1.833,4);
+\draw [gray, dashed] (1.833,4) to [out = 20, in = 160] (6-1.833,4);
+
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+\draw (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+
+\begin{scope}[shift = {(-11.576,1.67)}, scale = 0.583]
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\end{scope}
+\end{scope}
+
+%second
+\node at (15,8) {\large{$\dots$}};
+
+\begin{scope}[shift = {(20,0)}]
+
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (95/48,3.5) ;
+\draw (6-95/48,3.5) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\draw [gray] (95/48,3.5) to [out = -20, in = -160] (6-95/48,3.5);
+\draw [gray, dashed] (95/48,3.5) to [out = 20, in = 160] (6-95/48,3.5);
+
+
+
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+\draw (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+
+\begin{scope}[shift = {(-10,1.51)}, scale = 0.52]
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\end{scope}
+\end{scope}
+
+%third
+\node at (15,8) {\large{$\dots$}};
+
+\begin{scope}[shift = {(40,0)}]
+
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (17/8,3) ;
+\draw (6-17/8,3) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\draw [gray] (17/8,3) to [out = -20, in = -160] (6-17/8,3);
+\draw [gray, dashed] (17/8,3) to [out = 20, in = 160] (6-17/8,3);
+
+
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+\draw (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+
+\begin{scope}[shift = {(-8.38,1.3)}, scale = 0.455]
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\end{scope}
+\end{scope}
+
+
+\node at (56,8) {\large{$\dots$}};
+%fourth
+\begin{scope}[shift = {(60,0)}]
+
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (3,1) ;
+\draw (3,1) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+\draw (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+\end{scope}
+
+\end{tikzpicture}
+}
+
+\label{pic}
+\end{center}
+\end{figure}
+
+
+\end{frame}
+
+
+%------------------------------------------------
+\section{Results}
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Aim of my phd project}
+I studied the behaviour of the $\eta$ invariant under cone-edge degeneration. Let $D_\varepsilon$ be the Hodge or spin Dirac operator on $\Omega_\varepsilon$,
+
+\begin{block}{\begin{center}General aim\end{center}}
+\begin{center}
+Compute $\lim_{\ve\to0} \eta(D_\ve)-\eta(D_0)$ under degeneration.
+\end{center}
+\end{block}
+
+\begin{alertblock}{\begin{center}Takeaway 2\end{center}}
+\parbox{\linewidth}{
+Spectral invariants don't behave well under degeneration. Easy example: topologically $\Omega_\ve=\Omega_1\ \forall \ve\in (0,1]$, so for the $k^{th}$ Betti number $b^k(\ve)$ of $\Omega_\ve$ we have
+\[\lim_{\ve\to 0}b^k(\ve)- b^k(0)=b^k(1)-b^k(0)\neq 0\text{ in general}\]}
+Characterising this defect is an interesting problem!
+\end{alertblock}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{First, a definition}
+\begin{definition}[Generalised Witt condition]
+Let $\dim Z=n$, $D_Y$ the Hodge/spin Dirac operator of the link $Y$.
+\begin{itemize}
+\item The Hodge operator is \emph{admissible} if and only if:
+\[
+\begin{cases}
+\sigma(D^2_Y\rel{\Lambda^{{n}/2-1}})\cap \{0\}=\sigma(D^2_Y\rel{\Lambda^{n/2}})\cap\left[0,1\right]=\emptyset\quad\text{ if $n$ is even}\\
+\sigma(D^2_Y\rel{\Lambda^{(n-1)/2}})\cap\left[0,\frac{3}{4}\right]=\emptyset\quad\text{ if $n$ is odd}
+\end{cases}
+\]
+\item The Dirac operator is \emph{admissible} if and only if:
+\[
+\sigma(D^2_Y)\cap \left[0,\frac{9}{4}\right]=\emptyset
+\]
+\end{itemize}
+\end{definition}
+\begin{exampleblock}{Remark}
+\justifying
+For $Y=S^{n-1}/\Gamma$, $n>4$, both operators are admissible.
+\end{exampleblock}
+\end{frame}
+
+%------------------------------------------------
+\subsection*{Conic degeneration}
+\begin{frame}
+\frametitle{Results}
+
+\begin{theorem}[N. - Conic degeneration]
+Let $\dim Z\geq 3$. Assume that $D_\varepsilon$ is admissible, then:
+\be
+\lim_{\varepsilon\to 0}\eta(D_\ve)=\eta(D_0)+\eta_R(D_Z)
+\ee
+where $\eta_R(D_Z)$ is the \emph{rescaled $\eta$ invariant} of $D_Z$.
+\end{theorem}
+
+The result about conic degeneration is non-trivial not only because it shows that there is additional term appearing in the limit, but also for the sheer fact that the limit exists!
+
+\begin{figure}[H]
+{\scalefont{0.6}
+\begin{center}
+\begin{tikzpicture}[scale=0.1]
+\draw (0,10) to (5,0);
+\draw (5,0) to (10,10);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (3,4) to [out = -20, in = -160] (7,4);
+\draw [gray, dashed] (3,4) to [out = 20, in = 160] (7,4);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (-2,0) to (-2,18);
+\node [below left] at (-2.5,18) {$\rho$};
+\draw (-2,10) to (-2.5,10);
+\node [left] at (-2.5,0) {$0$};
+\node [left] at (-2.5,10) {$1$};
+\draw (-2,4) to (-2.5,4);
+\node [left] at (-2.5,4) {$\varepsilon$};
+\node [below left, draw] at (13,2) {$\Omega_0$};
+%\draw (-2,16) to (-2.5,16);
+%\node [left] at (-2.5,16) {$2$};
+
+\node (A) at (15,8) {\large{$+$}};
+
+\node (B) [right=-3mm of A] {
+\begin{tikzpicture}[scale=0.15]
+\draw (20,10) to (23,4);
+\draw (30,10) to (27,4);
+\draw [gray] (20,10) to [out = -20, in = -160] (30,10);
+\draw [gray, dashed] (20,10) to [out = 20, in = 160] (30,10);
+\draw [gray] (23,4) to [out = -20, in = -160] (27,4);
+\draw [gray, dashed] (23,4) to [out = 20, in = 160] (27,4);
+\draw (20,10) to (19.5,11);
+\draw [dotted] (19.5,11) to (18.5,13);
+\draw (30,10) to (30.5,11);
+\draw [dotted] (30.5,11) to (31.5,13);
+\draw (23,4) to [out=-60,in=180](25,0);
+\draw (27,4) to [out=-120,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\draw[|->] (32,0) to (32,15);
+\node [below right] at (32.5,15) {$x$};
+\draw (32,10) to (32.5,10);
+\node [right] at (32.5,0) {$0$};
+\node [right] at (32.5,10) {$\frac{1}{\varepsilon}$};
+\draw (32,4) to (32.5,4);
+\node [right] at (32.5,4) {$1$};
+\node [draw] at (28,2) {$Z$};
+\end{tikzpicture}
+};
+
+\node (C) [right=0mm of B] {
+\begin{tikzpicture}[scale=0.1]
+\node at (38,8) {\large{$=$}};
+
+\begin{scope}[shift = {(44,0)}]
+\draw (0,10) to (3,4);
+\draw (10,10) to (7,4);
+\draw (3,4) to [out=-60,in=180](5,0);
+\draw (7,4) to [out=-120,in=0](5,0);
+\draw (5,3) to [out =-120,in=120] (5,1.75);
+\draw (4.9,2.7) to [out =-60,in=60] (4.9,2.05);
+\draw (5,1.75) to [out =-60,in=60] (5,0.5);
+\draw (5.1,1.45) to [out =-120,in=120] (5.1,0.8);
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray] (3,4) to [out = -20, in = -160] (7,4);
+\draw [gray, dashed] (3,4) to [out = 20, in = 160] (7,4);
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (12,0) to (12,18);
+\node [below right] at (12.5,18) {$\rho$};
+\draw (12,10) to (12.5,10);
+\node [right] at (12.5,0) {$0$};
+\node [right] at (12.5,10) {$1$};
+\draw (12,4) to (12.5,4);
+\node [right] at (12.5,4) {$\varepsilon$};
+\node [draw] at (-3,2) {$\Omega_\varepsilon$};
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+\end{scope}
+\end{tikzpicture}
+};
+\end{tikzpicture}
+\end{center}
+}
+\end{figure}
+\end{frame}
+
+
+%------------------------------------------------
+\subsection*{Cone-edge degeneration}
+\begin{frame}
+\frametitle{Results}
+\begin{theorem}[N. - Cone-edge degeneration]
+\justifying
+Let $\dim Z\geq 3$. Assume that $D_\varepsilon$ is admissible, then:
+\be
+\lim_{\varepsilon\to 0}\eta(D_\ve)=\eta(D_0)+\ind_R(D_Z)\eta(D_B)+\ind(D_B)\eta_R(D_Z)
+\ee
+where $\ind_R(D_Z)=\ind_{L^2}(D_Z)$, and $\eta_R(D_Z)$ is the rescaled $\eta$ invariant.
+\end{theorem}
+
+The form of the extra term is a generalisation of the product formula for the $\eta$ invariant. Non-trivial: $\ind_R(D_Z)=\ind_{L^2}(D_Z)$.
+
+\begin{figure}[H]
+\begin{center}
+{\scalefont{0.6}
+\begin{tikzpicture}[scale=0.1]
+
+\draw [gray] (2,4) to [out = -20, in = -160] (6-2,4);
+\draw [gray, dashed] (2,4) to [out = 20, in = 160] (6-2,4);
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (3,1);
+\draw (3,1) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+
+
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+\draw (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (-2,1) to (-2,18);
+\node [below left] at (-2.5,18) {$\rho$};
+\draw (-2,10) to (-2.5,10);
+\node [left] at (-2.5,1) {$0$};
+\node [left] at (-2.5,10) {$1$};
+\draw (-2,4) to (-2.5,4);
+\node [left] at (-2.5,4) {$\varepsilon$};
+\node [below left, draw] at (13,2) {$\Omega_0$};
+%\draw (-2,16) to (-2.5,16);
+%\node [left] at (-2.5,16) {$2$};
+
+\node (A) at (15,8) {\large{$+$}};
+
+\node (B) [right=-3mm of A] {
+\begin{tikzpicture}[scale=0.15]
+\draw (23-1.8,10) to (23,4);
+\draw (27+1.8,10) to (27,4);
+\draw [gray] (23-1.8,10) to [out = -20, in = -160] (27+1.8,10);
+\draw [gray, dashed] (23-1.8,10) to [out = 20, in = 160] (27+1.8,10);
+\draw [gray] (23,4) to [out = -20, in = -160] (27,4);
+\draw [gray, dashed] (23,4) to [out = 20, in = 160] (27,4);
+\draw (23-1.8,10) to (23-2.1,11);
+\draw [dotted] (23-2.1,11) to (23-2.7,13);
+\draw (27+1.8,10) to (27+2.1,11);
+\draw [dotted] (27+2.1,11) to (27+2.7,13);
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\draw[|->] (32,0) to (32,15);
+\node [below right] at (32.5,15) {$x$};
+\draw (32,10) to (32.5,10);
+\node [right] at (32.5,0) {$0$};
+\node [right] at (32.5,10) {$\frac{1}{\varepsilon}$};
+\draw (32,4) to (32.5,4);
+\node [right] at (32.5,4) {$1$};
+\node [draw] at (28,2) {$Z$};
+\end{tikzpicture}
+};
+
+\node (C) [right=0mm of B] {
+\begin{tikzpicture}[scale=0.1]
+\node at (38,8) {\large{$=$}};
+
+\begin{scope}[shift = {(44,0)}]
+
+\draw [dotted] (0,10) to (0.667,8);
+\draw (0.667,8) to (1.833,4) ;
+\draw (6-1.833,4) to (6-0.667,8);
+\draw [dotted](6-0.667,8) to (6,10);
+
+\draw [gray] (0,10) to [out = -20, in = -160] (10,10);
+\draw [gray, dashed] (0,10) to [out = 20, in = 160] (10,10);
+\draw [gray!50] (0,10) to [out = -20, in = -160] (6,10);
+\draw [gray!50, dashed] (0,10) to [out = 20, in = 160] (6,10);
+
+\begin{scope}[scale = 1, shift={(0.8,0)}, gray!50]
+\draw (9.9-4.69,4.9+5) to (10.1-4.69,5.1+5);
+\draw (9.9-4.69,5.1+5) to (10.1-4.69,4.9+5);
+\draw (5.5,5+5) to [out = 90, in = 180] (6.5,6+5);
+\draw (6.5,6+5) to [out=0, in = 180] (8,5.5+5);
+\draw (8,5.5+5) to [out = 0, in = 90] (9,5+5);
+\draw (5.5,5+5) to [out = -90, in = 180] (6,4.5+5);
+\draw (6,4.5+5) to [out=0, in = 180] (8,4+5);
+\draw (8,4+5) to [out = 0, in = -90] (9,5+5);
+\end{scope}
+
+
+\draw [dotted] (10,10) to (10-0.667,8);
+
+\draw [gray] (1.833,4) to [out = -20, in = -160] (6-1.833,4);
+\draw [gray, dashed] (1.833,4) to [out = 20, in = 160] (6-1.833,4);
+
+
+
+\draw (5.5,5) to [out = 90, in = 180] (6.5,6);
+\draw (6.5,6) to [out=0, in = 180] (8,5.5);
+\draw (8,5.5) to [out = 0, in = 90] (9,5);
+\draw (5.5,5) to [out = -90, in = 180] (6,4.5);
+\draw (6,4.5) to [out=0, in = 180] (8,4);
+\draw (8,4) to [out = 0, in = -90] (9,5);
+\draw (7.6, 5.58) to [out = -60, in = 30] (6.85,4.3);
+\draw [densely dashed] (7.6, 5.58) to [out = -150, in = 120] (6.85,4.3);
+
+\draw (0,10) to [out = 120, in = -90] (-1,12.5);
+\draw (10,10) to [out = 60, in = -90] (11, 12.5);
+\draw (-1,12.5) to [out=90 , in=180] (5,16);
+\draw (11,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(2, -1)}, rotate=10](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(2, -1)},rotate=10](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+\draw[|->] (12,1) to (12,18);
+\node [below right] at (12.5,18) {$\rho$};
+\draw (12,10) to (12.5,10);
+\node [right] at (12.5,1) {$0$};
+\node [right] at (12.5,10) {$1$};
+\draw (12,4) to (12.5,4);
+\node [right] at (12.5,4) {$\varepsilon$};
+\node [draw] at (-4,2) {$\Omega_\varepsilon$};
+%\draw (12,16) to (12.5,16);
+%\node [right] at (12.5,16) {$2$};
+
+\begin{scope}[shift = {(-11.576,1.67)}, scale = 0.583]
+\draw (23,4) to [out=-72.54,in=180](25,0);
+\draw (27,4) to [out=-180+72.54,in=0](25,0);
+\draw (25,3) to [out =-120,in=120] (25,1.75);
+\draw (24.9,2.7) to [out =-60,in=60] (24.9,2.05);
+\draw (25,1.75) to [out =-60,in=60] (25,0.5);
+\draw (25.1,1.45) to [out =-120,in=120] (25.1,0.8);
+\end{scope}
+
+\end{scope}
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\end{center}
+\end{figure}
+
+\end{frame}
+
+%------------------------------------------------
+\section{An application}
+\subsection*{Application to orbifolds}
+\begin{frame}
+\frametitle{The general idea}
+
+These theorems are analytical in nature. In the spirit of Index Theory, they are better used when paired with integrality conditions:
+
+\begin{block}{Sample input}
+For a given family of $\Omega_\ve$, $\eta(D_\ve)\in\bb Z$ $\forall \ve\in (0,1]$.
+\end{block}
+
+This turns the limit expressions into exact formulas, e.g.
+\[
+\exists\ve_0>0: \eta(D_\ve)=\eta(D_0)+\ind_R(D_Z)\eta(D_B)+\ind(D_B)\eta_R(D_Z)\ \ \forall\ve\leq\ve_0
+\]
+
+Results similar to the Sample Input exist, as we'll see soon; we want to use the equation to compute $\eta(D_\ve)$, so one also needs to find a way to compute the rest of the terms.
+
+\end{frame}
+
+
+
+%\subsection{} A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+
+
+%------------------------------------------------
+
+%\subsection*{Proof of a result}
+\begin{frame}
+\frametitle{Torus orbifolds}
+
+\begin{columns}[c]
+\column{0.5\textwidth}
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[scale=0.45, every node/.style={transform shape}]
+
+\node (A1) {
+\begin{tikzpicture}[scale=0.45]
+\draw (5,9) to [out = 180, in = -90] (0,12.5);
+\draw (5,9) to [out = 0, in = -90] (10, 12.5);
+\draw (0,12.5) to [out=90 , in=180] (5,16);
+\draw (10,12.5) to [out=90 , in=0] (5,16);
+\draw [shift = {(0, 0)}, rotate=0](2,13) to [out=-20,in=-160] (8,13);
+\draw [shift = {(0, 0)},rotate=0](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+%\draw (3.9,12.5) to [out=235,in=125] (3.9,9.05);
+%\draw [dashed] (3.9,12.5) to [out=305,in=55] (3.9,9.05);
+%\node [below left, draw] at (13,9) {$T^2$};
+\end{tikzpicture}
+};
+
+\node (C1) [right=15mm of A1, draw] {\large{$T^2$}};
+
+\node (B1) [right = 40mm of A1] {
+\begin{tikzpicture}[scale=0.3]
+%\fill[pattern=north west lines, pattern color=gray!20] (-5,0) to (5,0) to (5,-5) to (-5,-5) to cycle;
+\draw (-5,5) to (5,5) to (5,-5) to (-5,-5) to cycle;
+\draw (5,0.25) to [out=-45, in = 135] (5.25,-0.25);
+\draw (5,0.25) to [out=-135, in = 45] (4.75,-0.25);
+\draw (-5,0.25) to [out=-45, in = 135] (-4.75,-0.25);
+\draw (-5,0.25) to [out=-135, in = 45] (-5.25,-0.25);
+\draw (0,5) to [out=135, in=-45] (-0.5,5.25);
+\draw (0,5) to [out=-135, in=45] (-0.5,4.75);
+\draw (0.5,5) to [out=135, in=-45] (0,5.25);
+\draw (0.5,5) to [out=-135, in=45] (0,4.75);
+\draw (0,-5) to [out=135, in=-45] (-0.5,-4.75);
+\draw (0,-5) to [out=-135, in=45] (-0.5,-5.25);
+\draw (0.5,-5) to [out=135, in=-45] (0,-4.75);
+\draw (0.5,-5) to [out=-135, in=45] (0,-5.25);
+%\draw (-5,0) to (0,0);
+%\draw (5,0) to (0,0);
+\node at (-0.29,-0.02) {\textbullet};
+%\node[center] at (0,0) {\tiny\textbullet};
+%\draw (0,5) to (0,-5);
+\end{tikzpicture}
+};
+
+\node (A2) [below=12mm of A1]{
+\begin{tikzpicture}[scale=0.3]
+\path [name path=dl] (5,9) to [out = 180, in = -90] (-1,12.5);
+\path [name path=dr] (5,9) to [out = 0, in = -90] (11, 12.5);
+\path [name path=lu] (-1,12.5) to [out=90 , in=180] (5,16);
+\path [name path=ru] (11,12.5) to [out=90 , in=0] (5,16);
+
+\path [name path=dll] (5,8) to (-2,12.5);
+\path [name path=drl] (5,8) to(12, 12.5);
+\path [name path=lul] (-2,12.5) to (5,17);
+\path [name path=rul] (12,12.5) to (5,17);
+
+\path [name intersections={of= dl and dll,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dl-\i)};
+\path [name intersections={of= dr and drl,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dr-\i)};
+\path [name intersections={of= lu and lul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (lu-\i)};
+\path [name intersections={of= ru and rul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (ru-\i)};
+	
+\draw (5,8) to [out=135,in=-10] (dl-1);
+\draw (dl-1) to [out=170,in=-80] (dl-2);
+\draw (dl-2) to [out=100, in= -45] (-1.5,12.5);
+\draw (-1.5,12.5) to [out=45, in=-100] (lu-1);
+\draw (lu-1) to [out=80, in=-170] (lu-2);
+\draw (lu-2) to [out=10, in=-135] (5,17);
+\draw (5,17) to [out=-45, in=170] (ru-2);
+\draw (ru-2) to [out=-10, in=100] (ru-1);
+\draw (ru-1) to [out=-80, in=135] (11.5,12.5);
+\draw (11.5,12.5) to [out=-135,in=80] (dr-2);
+\draw (dr-2) to [out=-100, in=10] (dr-1);
+\draw (5,8) to [out=45,in=190] (dr-1);
+
+%\draw [shift = {(0, 0)}, rotate=0, densely dashed](2,13) to [out=-20,in=-160] (8,13);
+%\draw [shift = {(0, 0)},rotate=0](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+%\draw (3.9,12.5) to [out=235,in=125] (3.9,9.05);
+%\draw [dashed] (3.9,12.5) to [out=305,in=55] (3.9,9.05);
+%\node [below left, draw] at (15,9) {$T^2/\mu_2=\Omega_0$};
+\end{tikzpicture}
+};
+
+\node (C2) [below=35mm of C1, draw] {\large{$T^2/\mu_2=\Omega_0$}};
+
+\node (B2) [below = 15mm of B1] {
+\begin{tikzpicture}[scale=0.3]
+\fill[pattern=north west lines, pattern color=gray!20] (5,0) to (5,-5) to (-5,-5) to (-5,0) to cycle;
+\draw (-5,5) to (5,5) to (5,-5) to (-5,-5) to cycle;
+\draw (5,-2.25) to [out=-45, in = 135] (5.25,-2.75);
+\draw (5,-2.25) to [out=-135, in = 45] (4.75,-2.75);
+\draw (-5,-2.25) to [out=-45, in = 135] (-4.75,-2.75);
+\draw (-5,-2.25) to [out=-135, in = 45] (-5.25,-2.75);
+
+\draw (5,2.25) to [out=45, in = -135] (5.25,2.75);
+\draw (5,2.25) to [out=135, in = -45] (4.75,2.75);
+\draw (-5,2.25) to [out=45, in = -135] (-4.75,2.75);
+\draw (-5,2.25) to [out=135, in = -45] (-5.25,2.75);
+
+\draw (2,-5) to [out=45, in=-135] (2.5,-4.75);
+\draw (2,-5) to [out=-45, in=135] (2.5,-5.25);
+\draw (2.5,-5) to [out=45, in=-135] (3,-4.75);
+\draw (2.5,-5) to [out=-45, in=135] (3,-5.25);
+\draw (-2.5,-5) to [out=135, in=-45] (-3,-4.75);
+\draw (-2.5,-5) to [out=-135, in=45] (-3,-5.25);
+\draw (-2,-5) to [out=135, in=-45] (-2.5,-4.75);
+\draw (-2,-5) to [out=-135, in=45] (-2.5,-5.25);
+
+\draw (2,5) to [out=45, in=-135] (2.5,5.25);
+\draw (2,5) to [out=-45, in=135] (2.5,4.75);
+\draw (2.5,5) to [out=45, in=-135] (3,5.25);
+\draw (2.5,5) to [out=-45, in=135] (3,4.75);
+\draw (-2.5,5) to [out=135, in=-45] (-3,5.25);
+\draw (-2.5,5) to [out=-135, in=45] (-3,4.75);
+\draw (-2,5) to [out=135, in=-45] (-2.5,5.25);
+\draw (-2,5) to [out=-135, in=45] (-2.5,4.75);
+
+\draw[dotted] (-5,0) to (0,0);
+\draw [dotted] (5,0) to (0,0);
+%\draw  (0,5) to (0,0);
+%\draw  (0,0) to (0,-5);
+\node at (-0,0.18) {\textbullet};
+%\node[center] at (0,0) {\tiny\textbullet};
+%\draw (0,5) to (0,-5);
+\end{tikzpicture}
+};
+
+\node (A3) [below = 18mm of A2]{
+\begin{tikzpicture}[scale=0.3]
+\path [name path=dl] (5,9) to [out = 180, in = -90] (-1,12.5);
+\path [name path=dr] (5,9) to [out = 0, in = -90] (11, 12.5);
+\path [name path=lu] (-1,12.5) to [out=90 , in=180] (5,16);
+\path [name path=ru] (11,12.5) to [out=90 , in=0] (5,16);
+
+\path [name path=dll] (5,8) to (-2,12.5);
+\path [name path=drl] (5,8) to(12, 12.5);
+\path [name path=lul] (-2,12.5) to (5,17);
+\path [name path=rul] (12,12.5) to (5,17);
+
+\path [name intersections={of= dl and dll,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dl-\i)};
+\path [name intersections={of= dr and drl,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dr-\i)};
+\path [name intersections={of= lu and lul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (lu-\i)};
+\path [name intersections={of= ru and rul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (ru-\i)};
+	
+\draw (5,8) to [out=180,in=-10] (dl-1);
+\draw (dl-1) to [out=170,in=-80] (dl-2);
+\draw (dl-2) to [out=100, in= -90] (-1.5,12.5);
+\draw (-1.5,12.5) to [out=90, in=-100] (lu-1);
+\draw (lu-1) to [out=80, in=-170] (lu-2);
+\draw (lu-2) to [out=10, in=-180] (5,17);
+\draw (5,17) to [out=0, in=170] (ru-2);
+\draw (ru-2) to [out=-10, in=100] (ru-1);
+\draw (ru-1) to [out=-80, in=90] (11.5,12.5);
+\draw (11.5,12.5) to [out=-90,in=80] (dr-2);
+\draw (dr-2) to [out=-100, in=10] (dr-1);
+\draw (5,8) to [out=0,in=190] (dr-1);
+
+%\draw [shift = {(0, 0)}, rotate=0, densely dashed](2,13) to [out=-20,in=-160] (8,13);
+%\draw [shift = {(0, 0)},rotate=0](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+%\draw (3.9,12.5) to [out=235,in=125] (3.9,9.05);
+%\draw [dashed] (3.9,12.5) to [out=305,in=55] (3.9,9.05);
+%\node [below left, draw] at (13,9) {$\Omega_\ve$};
+\end{tikzpicture}
+};
+
+\node (C3) [below=40mm of C2, draw] {\large{$\Omega_\ve$}};
+
+\node (B3) [below = 15mm of B2] {
+\begin{tikzpicture}[scale=0.3]
+%\fill[pattern=north west lines, pattern color=gray!20] (5,0) to (5,-5) to (-5,-5) to (-5,0) to cycle;
+\draw (-4,5) to (-1,5) to [out=0, in = 180] (0,5.4) to [out=0,in=180] (1,5) to (4,5) to [out=0,in=135] (5,5) to [out=-45,in=90] (5,4) to (5,1) to [out=270,in=45] (5,0) to [out=-135,in=0] (4,0) to (1,0) to [out=180, in=0] (0,-0.4) to [out=180,in=0] (-1,0) to (-4,0) to [out=180, in=-45] (-5,0) to [out=135, in=-90] (-5,1) to (-5,4) to [out=90, in=-135] (-5,5) to [out=45, in=180] (-4,5);
+
+\draw (5,2.25) to [out=45, in = -135] (5.25,2.75);
+\draw (5,2.25) to [out=135, in = -45] (4.75,2.75);
+\draw (-5,2.25) to [out=45, in = -135] (-4.75,2.75);
+\draw (-5,2.25) to [out=135, in = -45] (-5.25,2.75);
+
+\draw (2,0) to [out=45, in=-135] (2.5,0.25);
+\draw (2,-0) to [out=-45, in=135] (2.5,-0.25);
+\draw (2.5,-0) to [out=45, in=-135] (3,0.25);
+\draw (2.5,-0) to [out=-45, in=135] (3,-0.25);
+\draw (-2.5,-0) to [out=135, in=-45] (-3,0.25);
+\draw (-2.5,-0) to [out=-135, in=45] (-3,-0.25);
+\draw (-2,-0) to [out=135, in=-45] (-2.5,0.25);
+\draw (-2,-0) to [out=-135, in=45] (-2.5,-0.25);
+
+\draw (2,5) to [out=45, in=-135] (2.5,5.25);
+\draw (2,5) to [out=-45, in=135] (2.5,4.75);
+\draw (2.5,5) to [out=45, in=-135] (3,5.25);
+\draw (2.5,5) to [out=-45, in=135] (3,4.75);
+\draw (-2.5,5) to [out=135, in=-45] (-3,5.25);
+\draw (-2.5,5) to [out=-135, in=45] (-3,4.75);
+\draw (-2,5) to [out=135, in=-45] (-2.5,5.25);
+\draw (-2,5) to [out=-135, in=45] (-2.5,4.75);
+%\draw [dotted] (0,5) to (0,0);
+%\draw [dotted] (0,0) to (0,-5);
+%\node at (-0,0.56) {\tiny\textbullet};
+%\node[center] at (0,0) {\tiny\textbullet};
+%\draw (0,5) to (0,-5);
+\end{tikzpicture}
+};
+%\draw[|->] (-2,0) to (-2,18);
+%\node [below left] at (-2.5,18) {$\rho$};
+%\draw (-2,10) to (-2.5,10);
+%\node [left] at (-2.5,0) {$0$};
+%\node [left] at (-2.5,10) {$1$};
+%\draw (-2,4) to (-2.5,4);
+%\node [left] at (-2.5,4) {$\varepsilon$};
+%\draw (-2,16) to (-2.5,16);
+%\node [left] at (-2.5,16) {$2$};
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\quad\newline
+\quad\newline
+\column{0.5\textwidth}
+\begin{itemize}
+\item The family of manifolds $\Omega_\ve$ we'll consider comes from Joyce's generalisation [J96] of the Kummer construction;
+\item We consider a quotient $T^7/\Gamma$, with $\Gamma$ a given finite group. In this case - unlike in the picture - we get actual singularities;
+\item More precisely, we get a cone-edge singularity with edge $S^1$.
+\end{itemize}
+\quad\newline
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Here we use the theorem}
+This is the integrality result we'll use, stemming from previous work of [CGN15]:
+\begin{theorem}[Scaduto, '18]
+Let $\Omega_0=T^7/\Gamma$, let $\Omega_\ve$ be the corresponding degenerating family. Then
+\be
+\bar\nu(\Omega_\ve)=3\eta(B_\ve)-24\eta(D_\ve)\in\bb Z\ \forall \ve\in (0,1]
+\ee
+where $B_\ve$ is the signature operator on $\Omega_\ve$, $D_\ve$ the spin Dirac operator on $\Omega_\ve$.
+\end{theorem}
+We obtain an exact expression: $\exists\varepsilon_0\in(0,1]$ such that
+\be
+\begin{split}
+\bar\nu(\Omega_\ve)=&3(\eta(B_0)+\ind_R(B_Z)\eta(B_{S^1})+\ind(B_{S^1})\eta_R(B_Z))\\
+&-24(\eta(D_0)+\ind_R(D_Z)\eta(D_{S^1})+\ind(D_{S^1})\eta_R(D_Z))\\
+&=3\eta(B_0)-24\eta(D_0)=\bar\nu(\Omega_0) \quad \forall\varepsilon\leq\varepsilon_0
+\end{split}
+\ee
+\end{frame}
+
+\begin{frame}
+\frametitle{Computation of $\bar\nu(\Omega_0)$}
+The group $\Gamma$ is the finite group generated by $\alpha$ and $\beta$:
+\[
+\begin{cases}
+\alpha:\ [(x_1,\dots,x_7)]\mapsto [(x_2,x_3,x_7,-x_6,-x_4,x_1,x_5)]\\
+\beta:\ [(x_1,\dots,x_7)]\mapsto \left[\left(\frac{1}{2}-x_1,\frac{1}{2}-x_2,-x_3,-x_4,\frac{1}{2}+x_5,\frac{1}{2}+x_6,x_7\right)\right]
+\end{cases}
+\]
+Both $\alpha$ and $\beta$ commute with the orientation reversing isometry
+\[
+\iota:\ [(x_1,\dots,x_7)]\mapsto [-(x_1,\dots,x_7)]
+\]
+So $\iota$ descends to the quotient, hence $\eta(B_{T^7/\Gamma})=0=\eta(D_{T^7/\Gamma})$. One also shows
+\[
+\eta(B_{T^7/\Gamma})=\eta(B_0),\quad\eta(D_{T^7/\Gamma})=\eta(D_0)
+\]
+So $0=\bar\nu(\Omega_0)=\bar\nu(\Omega_\ve)\ \forall \ve\leq\ve_0$.
+\end{frame}
+
+
+%------------------------------------------------
+
+
+\section{Further directions}
+\subsection*{One main quest and three secondary quests}
+\begin{frame}
+\frametitle{Main quest}
+Option 1: keep following Joyce's construction and compute $\bar\nu(\chi)$. So far I have
+\[
+\bar \nu(\chi)=24\left(h(T^7/\Gamma)+h_{L^2}(Z)h(S^1)-2\spf{\left(\left(D_{M_s}\right)_{s\in[0,1]}\right)}-h(\chi)\right)
+\]
+\quad\newline
+where $h(\cdot):=\dim\ker(D_{\cdot})$, $\spf$ denotes spectral flow.
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[scale=0.7, every node/.style={transform shape}]
+
+\node (A1) {
+\begin{tikzpicture}[scale=0.3]
+\path [name path=dl] (5,9) to [out = 180, in = -90] (-1,12.5);
+\path [name path=dr] (5,9) to [out = 0, in = -90] (11, 12.5);
+\path [name path=lu] (-1,12.5) to [out=90 , in=180] (5,16);
+\path [name path=ru] (11,12.5) to [out=90 , in=0] (5,16);
+
+\path [name path=dll] (5,8) to (-2,12.5);
+\path [name path=drl] (5,8) to(12, 12.5);
+\path [name path=lul] (-2,12.5) to (5,17);
+\path [name path=rul] (12,12.5) to (5,17);
+
+\path [name intersections={of= dl and dll,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dl-\i)};
+\path [name intersections={of= dr and drl,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dr-\i)};
+\path [name intersections={of= lu and lul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (lu-\i)};
+\path [name intersections={of= ru and rul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (ru-\i)};
+	
+\draw (5,8) to [out=135,in=-10] (dl-1);
+\draw (dl-1) to [out=170,in=-80] (dl-2);
+\draw (dl-2) to [out=100, in= -45] (-1.5,12.5);
+\draw (-1.5,12.5) to [out=45, in=-100] (lu-1);
+\draw (lu-1) to [out=80, in=-170] (lu-2);
+\draw (lu-2) to [out=10, in=-135] (5,17);
+\draw (5,17) to [out=-45, in=170] (ru-2);
+\draw (ru-2) to [out=-10, in=100] (ru-1);
+\draw (ru-1) to [out=-80, in=135] (11.5,12.5);
+\draw (11.5,12.5) to [out=-135,in=80] (dr-2);
+\draw (dr-2) to [out=-100, in=10] (dr-1);
+\draw (5,8) to [out=45,in=190] (dr-1);
+
+\end{tikzpicture}
+};
+
+\node (C1) [below=5mm of A1, draw] {$T^7/\Gamma\simeq\Omega_0$};
+
+\node (B1) [right=4mm of A1] {\large{${\leadsto}$}};
+
+\node (A2) [right=12mm of A1]{
+\begin{tikzpicture}[scale=0.3]
+\path [name path=dl] (5,9) to [out = 180, in = -90] (-1,12.5);
+\path [name path=dr] (5,9) to [out = 0, in = -90] (11, 12.5);
+\path [name path=lu] (-1,12.5) to [out=90 , in=180] (5,16);
+\path [name path=ru] (11,12.5) to [out=90 , in=0] (5,16);
+
+\path [name path=dll] (5,8) to (-2,12.5);
+\path [name path=drl] (5,8) to(12, 12.5);
+\path [name path=lul] (-2,12.5) to (5,17);
+\path [name path=rul] (12,12.5) to (5,17);
+
+\path [name intersections={of= dl and dll,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dl-\i)};
+\path [name intersections={of= dr and drl,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dr-\i)};
+\path [name intersections={of= lu and lul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (lu-\i)};
+\path [name intersections={of= ru and rul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (ru-\i)};
+	
+\draw (5,8) to [out=180,in=-10] (dl-1);
+\draw (dl-1) to [out=170,in=-80] (dl-2);
+\draw (dl-2) to [out=100, in= -90] (-1.5,12.5);
+\draw (-1.5,12.5) to [out=90, in=-100] (lu-1);
+\draw (lu-1) to [out=80, in=-170] (lu-2);
+\draw (lu-2) to [out=10, in=-180] (5,17);
+\draw (5,17) to [out=0, in=170] (ru-2);
+\draw (ru-2) to [out=-10, in=100] (ru-1);
+\draw (ru-1) to [out=-80, in=90] (11.5,12.5);
+\draw (11.5,12.5) to [out=-90,in=80] (dr-2);
+\draw (dr-2) to [out=-100, in=10] (dr-1);
+\draw (5,8) to [out=0,in=190] (dr-1);
+\end{tikzpicture}
+};
+
+\node (C2) [below=5mm of A2, draw] {$\Omega_\ve$};
+
+\node (B2) [right=4mm of A2] {\large{${\leadsto}$}};
+
+\node (A3) [right = 12mm of A2]{
+\begin{tikzpicture}[scale=0.3]
+\path [name path=dl] (5,9) to [out = 180, in = -90] (-1,12.5);
+\path [name path=dr] (5,9) to [out = 0, in = -90] (11, 12.5);
+\path [name path=lu] (-1,12.5) to [out=90 , in=180] (5,16);
+\path [name path=ru] (11,12.5) to [out=90 , in=0] (5,16);
+
+\path [name path=dll] (5,8) to (-2,12.5);
+\path [name path=drl] (5,8) to(12, 12.5);
+\path [name path=lul] (-2,12.5) to (5,17);
+\path [name path=rul] (12,12.5) to (5,17);
+
+\path [name intersections={of= dl and dll,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dl-\i)};
+\path [name intersections={of= dr and drl,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (dr-\i)};
+\path [name intersections={of= lu and lul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (lu-\i)};
+\path [name intersections={of= ru and rul,total=\n}]
+	\foreach \i in {1,...,\n} {(intersection-\i) coordinate (ru-\i)};
+	
+\draw (5,8) to [out=180,in=-10] (dl-1);
+\draw [decorate, decoration={snake, segment length=2.25mm, amplitude=0.2mm}] (dl-1) to [out=170,in=-80] (dl-2);
+\draw (dl-2) to [out=100, in= -90] (-1.5,12.5);
+\draw (-1.5,12.5) to [out=90, in=-100] (lu-1);
+\draw [decorate, decoration={snake, segment length=2.25mm, amplitude=0.2mm}]  (lu-1) to [out=80, in=-170] (lu-2);
+\draw (lu-2) to [out=10, in=-180] (5,17);
+\draw (5,17) to [out=0, in=170] (ru-2);
+\draw [decorate, decoration={snake, segment length=2.25mm, amplitude=0.2mm}]  (ru-2) to [out=-10, in=100] (ru-1);
+\draw (ru-1) to [out=-80, in=90] (11.5,12.5);
+\draw (11.5,12.5) to [out=-90,in=80] (dr-2);
+\draw [decorate, decoration={snake, segment length=2.25mm, amplitude=0.2mm}]  (dr-2) to [out=-100, in=10] (dr-1);
+\draw (5,8) to [out=0,in=190] (dr-1);
+
+%\draw [shift = {(0, 0)}, rotate=0, densely dashed](2,13) to [out=-20,in=-160] (8,13);
+%\draw [shift = {(0, 0)},rotate=0](3.5,12.6) to [out=20,in=160] (6.5,12.6);
+%\draw (3.9,12.5) to [out=235,in=125] (3.9,9.05);
+%\draw [dashed] (3.9,12.5) to [out=305,in=55] (3.9,9.05);
+%\node [below left, draw] at (13,9) {$\Omega_\ve$};
+\end{tikzpicture}
+};
+
+\node (C3) [below=5mm of A3, draw] {$\chi$};
+
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Secondary quests}
+Option 2: extend the definition of admissible operators to include the case $Y=\bb RP^3$: this would allow to access more of Joyce's examples. However, I expect the same formula to hold, and formal computations yield $\bar\nu(\Omega_\ve)=0$ for all of these examples as well.\newline\par
+
+Option 3: we saw $\ind_R(D_Z)=\ind_{L^2}(D_Z)$. From work by Gilles Carron [C01], $\ind_{L^2}(D_Z)=\ind_{APS}(D_{\hat Z})$, where $\hat Z = \{z\in Z:\rho(z)\leq 1\}\subseteq Z$. It would be interesting to obtain a similar interpretation for the rescaled $\eta$ invariant $\eta_R(D_Z)$.\newline\par
+
+Option 4: W.D Gillam and S. Molcho proposed [GM15] a log-geometric reformulation of Melrose's theory, which is the theoretic foundation of this project. Working on this one would arguably lose sight of the trees, but start seeing the woods.
+\end{frame}
+
+
+
+%------------------------------------------------
+
+\subsection*{Thank you for your attention!}
+\begin{frame}
+\frametitle{Bibliography}
+\begin{itemize}
+\item [S15] Sher, David A. "Conic degeneration and the determinant of the Laplacian." Journal d'Analyse Math\'ematique 126.1 (2015): 175-226;
+\item [J96] Joyce, Dominic. "Compact Riemannian 7-manifolds with holonomy G2. II." Journal of Differential Geometry 43 (1996), 329?375
+\item [CGN15] Crowley, Diarmuid, Sebastian Goette, and Johannes Nordstr\"om. "An analytic invariant of G2 manifolds." arXiv preprint arXiv:1505.02734 (2015);
+\item [C01] Carron, Gilles. "Th\'eor\`emes de l'indice sur les vari\'et\'es non-compactes." Journal f\"ur die Reine und Angewandte Mathematik 541 (2001): 81-116;
+\item [GM15] Gillam, William D., and Samouil Molcho. "Log differentiable spaces and manifolds with corners." arXiv preprint arXiv:1507.06752 (2015).
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Q\&A}
+
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 

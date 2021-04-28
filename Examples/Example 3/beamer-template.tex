@@ -1,0 +1,252 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  This Beamer template was created by Cameron Bracken.
+%%  Anyone can freely use or modify it for any purpose
+%%  without attribution.
+%%
+%%  Last Modified: January 9, 2009
+%%
+
+\documentclass[xcolor=x11names, compress]{beamer}
+
+%% General document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.fractals}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath,amsthm,amssymb,amsfonts, mathrsfs, textcomp}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{palatino}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape}
+
+\setbeamercolor*{lower separation line head}{bg=DeepSkyBlue4} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{definizione}{Definizione}
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\title{Ehrenfest Chains \\and Poincar\'e's Recurrence Theorem}
+%\subtitle{SUBTITLE}
+\author{
+	Nelvis Fornasin\\
+	{\it University of Trento}\\
+}
+\date{
+	\includegraphics[scale=0.20]{logoUNITN}
+	\\
+	\vspace{1cm}
+	23 July 2014
+}
+\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Introduction}
+\subsection{A matter of consistency}
+\begin{frame}{A matter of consistency}
+\large{Consistency between the $2^{nd}$ Principle of Thermodynamics and microscopical models:\\}
+\begin{enumerate}
+\item<1->$2^{nd}$ Principle $\nleftrightarrow$ Classical Mechanics;
+\item<2->$2^{nd}$ Principle $\overbrace{\longleftrightarrow}^{?}$ Stochastic model;
+\item<2->$2^{nd}$ Principle $\overbrace{\longleftrightarrow}^{?}$ Quantum Mechanics;
+\end{enumerate}
+\onslide<2>{$\quad$\newline We start by considering the stochastic model.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Ehrenfest Chains}
+\subsection{The model}
+\begin{frame}{The model}
+\includegraphics[scale=0.2]{ehchain1}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{The model}
+\large{Features of Ehrenfest Chains:\\}
+\begin{itemize}
+\item Purely stochastic;
+\item Time is a discrete variable;
+\item Markov property.
+\end{itemize}
+$\quad$\newline We can analyze the model by means of the theory of Markov Chains!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Markov Chains}
+\begin{frame}{Markov Chains}
+\begin{definition}[Markov chain]
+	A discrete stochastic process $X = \{X_n, n\geq 0\}$ on the state space $S$ is said to be a \emph{Markov chain} if for any sequence $\{x_i\}_i\subset S$
+	\[
+	P\{X_{n+1}=x_{n+1}\ |\ X_k = x_k,\ 0 \leq k \leq n\} = P\{X_{n+1}=x_{n+1}\ |\ X_n = x_n\}
+	\]
+\end{definition}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Markov Chains}
+\begin{definition}[Communication between states]
+We say that a state $x$ \emph{leads} to state $y$ and write $x\longrightarrow y$ if $\exists n\geq 0\ :\ p^n(x,y) > 0$. If both $x\longrightarrow y$ and $x\longleftarrow y$ hold, we say that $x$ and $y$ \emph{communicate}, and write $x\longleftrightarrow y$.
+\end{definition}
+$\quad$\newline
+The relation $\longleftrightarrow$ is an equivalence relation!
+$\quad$\newline
+{\begin{definition}[Irreducibility]
+An MC is said to be irreducible if its state space is an equivalence class with respect to $\longleftrightarrow$.
+\end{definition}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Markov Chains}
+The following, fundamental result holds:
+\begin{theorem}\label{thm2}
+Let $\{X_n\}_n$ be an irreducible MC with finite state space S: then all the states of $\{X_n\}_n$ are recurrent, and the MC is said to be recurrent.
+\end{theorem}
+\onslide<2>{Furthermore, for the EC it is possible to compute a mean recurrence time as
+\[
+\tau(x) = 2^{2N}\frac{x!(2N-x)!}{2N!}
+\]
+For a state with $x$ particles out of all the $2N$ particles involved.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Poincar\'e's Recurrence Theorem}
+\begin{frame}{A matter of consistency}
+\large{Consistency between the $2^{nd}$ Principle of Thermodynamics and microscopical models:\\}
+\begin{enumerate}
+\item$2^{nd}$ Principle $\nleftrightarrow$ Classical Mechanics;
+\item$2^{nd}$ Principle $\nleftrightarrow$ Stochastic model; (!)
+\item$2^{nd}$ Principle $\overbrace{\longleftrightarrow}^{?}$ Quantum Mechanics;
+\end{enumerate}
+$\quad$\newline What about QM?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Physical hypotheses}
+\begin{frame}{Physical hypotheses}
+\large{Features of the system:}
+\begin{itemize}
+\item $N$ particles with mass $m$;
+\item No mutual interactions;
+\item Enclosure in a finite volume;
+\item No spin.
+\end{itemize}
+$\quad$\newline Main problem: exchange degeneracy.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Mathematical issues}
+\begin{frame}{Mathematical issues}
+\large{Main points we need to discuss:}
+\begin{enumerate}
+\item How do we swap functions?
+\item What is a symmetrization?
+\end{enumerate}
+$\quad$\newline And then we can prove the theorem!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Mathematical issues}
+\framesubtitle{1. Swapping functions}
+We work with:
+\begin{enumerate}
+\item The group of N-permutations: $\mathcal P_N$;
+\item The Hilbertian tensor product of N copies of the single particle's Hilbert space: $\mathcal H^{\otimes N}$.
+\end{enumerate}
+{$\quad$\newline $\Rightarrow$ There exists a representation of $\mathcal P_N$ on $\mathcal H^{\otimes N}!$
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Mathematical issues}
+\framesubtitle{2. Symmetrizing}
+Symmetrization and anti-symmetrization are indeed projections:
+\begin{itemize}
+\item $\mathcal A: \mathcal H^{\otimes N}\to\Lambda(\mathcal H^{\otimes N}) : \phi\mapsto\frac{1}{N!}\sum_{\sigma\in\mathscr P_N}\epsilon_\sigma\sigma^\otimes\phi$
+\item $\mathcal S: \mathcal H^{\otimes N}\to S(\mathcal H^{\otimes N}) : \phi\mapsto\frac{1}{N!}\sum_{\sigma\in\mathscr P_N}\sigma^\otimes\phi$
+\end{itemize}
+$\quad$\newline Where $\Lambda(\mathcal H^{\otimes N})$ and $S(\mathcal H^{\otimes N})$ are respectively the set of all anti-symmetric and symmetric tensors of $\mathcal H^{\otimes N}$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The theorem}
+\begin{frame}{The theorem}
+\large{
+\begin{theorem}[Poincar\'e's Recurrence Theorem]
+Let $\psi(t, x)$ the wavefunction of the considered system.\newline
+Then $\forall t_0\in\mathbb R, \forall \varepsilon>0\ \exists\ T=T(\varepsilon)>t_0$ such that
+\[
+||\psi(t_0,\cdot)-\psi(T,\cdot)||<\varepsilon
+\]
+\end{theorem}
+}
+Central point:
+\[
+\forall \varepsilon > 0,\ \forall x\in\mathbb R,\ \exists n,m\in\mathbb N\ :\ |nx-m|<\varepsilon
+\]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\scshape Conclusion}
+\subsection{A paradox?}
+\begin{frame}{A paradox?}
+\begin{itemize}
+\item Difference between \emph{figures} and \emph{real objects}: we should look for contradiction between theoretical previsions and experimental results;
+\item Poincar\'e's theorem and Ehrenfest's model highlight the fact we still haven't found a microscopical theory consistent with the $2^{nd}$ Law of Thermodynamics;
+\item Implying such a theory exists...
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ }
+\begin{frame}
+\end{frame}
+
+\end{document}
