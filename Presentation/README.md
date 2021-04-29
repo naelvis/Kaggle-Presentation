@@ -1,2 +1,2 @@
 # Presentation
-I think we should get rid of the index on top? And I don't like the title.
+I changed the colour and some things, needs to be filled. Feels a bit empty?
