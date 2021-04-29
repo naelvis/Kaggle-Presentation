@@ -17,15 +17,6 @@
 
 \documentclass{beamer}
 
-\useinnertheme[shadow=true]{rounded}
-\usepackage[T1]{fontenc}
-\newcommand\mybeamerthm[2]{%
-  \newtheorem*{#1}{#2}%
-  \AtBeginEnvironment{#1}{%
-     \setbeamercolor{block body}{fg=black,bg=blue!5}%
-  }%
-}
-
 \newcommand\mybeamerex[2]{%
   \newtheorem*{#1}{#2}%
   \AtBeginEnvironment{#1}{%
@@ -49,7 +40,7 @@
 %\usetheme{Boadilla}
 %\usetheme{CambridgeUS}
 %\usetheme{Copenhagen}
-\usetheme{Darmstadt}
+%\usetheme{Darmstadt}
 %\usetheme{Dresden}
 %\usetheme{Frankfurt}
 %\usetheme{Goettingen}
@@ -60,7 +51,7 @@
 %\usetheme{Madrid}
 %\usetheme{Malmoe}
 %\usetheme{Marburg}
-%\usetheme{Montpellier}
+\usetheme{Montpellier}
 %\usetheme{PaloAlto}
 %\usetheme{Pittsburgh}
 %\usetheme{Rochester}
@@ -73,10 +64,10 @@
 % changes the colors of your current slide theme.
 
 %\usecolortheme{albatross}
-\usecolortheme{beaver}
+%\usecolortheme{beaver}
 %\usecolortheme{beetle}
 %\usecolortheme{crane}
-%\usecolortheme{dolphin}
+\usecolortheme{dolphin}
 %\usecolortheme{dove}
 %\usecolortheme{fly}
 %\usecolortheme{lily}
@@ -153,8 +144,8 @@ Team Boosted Goose\\ % Your institution for the title page
 \frametitle{Preprocessing}
 We used pandas because sklearn's pipelines have been designed with the intention of making me angry (it worked). What we did in preprocessing
 \begin{itemize}
-\item Corrected mistakes, such as:
-\item Added features, such as:
+\item Corrected mistakes, such as: 200 hours worked per week, reporting date before accident date...
+\item Added features, such as: weekday of accident, core working hours, numeric transformations.
 \end{itemize}
 It wasn't fancy but it did what it had to, which is more than you can ask.
 \end{frame}
@@ -164,7 +155,10 @@ It wasn't fancy but it did what it had to, which is more than you can ask.
 \section{Text analysis}
 \begin{frame}
 \frametitle{Text analysis}
-Of course you can be fancy, but you can also be stubborn, and guess what, stubborn worked
+\emph{Try to classify sentences based on word occurrence. Weight clusters of words based on median ultimate.}
+
+
+\includegraphics[width=\textwidth]{./images/claimdescription.png}
 \end{frame}
 
 %------------------------------------------------
@@ -172,7 +166,7 @@ Of course you can be fancy, but you can also be stubborn, and guess what, stubbo
 \section{ML Algorithm}
 \begin{frame}
 \frametitle{ML Algorithm}
-Sometimes you can see the forest but not the trees, sometimes the trees but not the forest, here it's been four months and I wasn't able to see either
+After several attempts we decided to focus on a gradient boosted tree. \emph{Write something about ensemble techniques and the number of parallel trees and all these things.}
 \end{frame}
 
 %------------------------------------------------
@@ -180,27 +174,27 @@ Sometimes you can see the forest but not the trees, sometimes the trees but not 
 \section{Conclusions}
 \begin{frame}
 \frametitle{What worked and what didn't}
-\begin{columns}
-	\begin{column}{0.5\textwidth}
+%\begin{columns}
+%	\begin{column}{0.5\textwidth}
  	  	\begin{exampleblock}{\begin{center}What worked\end{center}}
 			\justifying
 			\begin{itemize}
   				\item Single word analysis;
  				\item Regression to distribution;
-  				\item Stacking with expert judgement (cooking).
+  				\item \emph{Stacking with expert judgement (cooking).}
   			\end{itemize}
 		\end{exampleblock}
-	\end{column}
-	\begin{column}{0.5\textwidth}  
+%	\end{column}
+%	\begin{column}{0.5\textwidth}  
 		\begin{alertblock}{\begin{center}What didn't work\end{center}}
 			\begin{itemize}
   				\item Neural networks;
  				\item External data sources (e.g. for inflation);
-  				\item Something about NLP? Like with entity analysis?
+  				\item \emph{Something about NLP? Like with entity analysis?}
   			\end{itemize}
 		\end{alertblock}
-	\end{column}
-\end{columns}
+%	\end{column}
+%\end{columns}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
