@@ -140,15 +140,26 @@ Team Boosted Goose\\ % Your institution for the title page
 
 %------------------------------------------------
 
+%------------------------------------------------
+
+\section{Overview}
+\begin{frame}
+\frametitle{Model overview}
+Our model can be divided into three mutually independent blocks:
+\includegraphics[width=\textwidth]{./images/modeldiagram.png}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
 \section{Preprocessing}
 %\subsection*{The $a$ invariant}
 \begin{frame}
 \frametitle{Preprocessing}
-The preprocessing consisted of the following major steps: (purely technical steps are not listed)
+The preprocessing consisted of the following major steps (purely technical steps are not listed):
 \begin{itemize}
-\item Adjusted unrealistic values of the predictors (e.g. 200 hours worked per week, reporting date before accident date, etc.)
-\item Added features, such as: weekday of accident, core working hours, reporting delay, etc.
-\item Excluded observations with inplausible set of predictors
+\item \textbf{Adjusted unrealistic values} of the predictors, e.g. 200 hours worked per week, reporting date before accident date, etc.
+\item \textbf{Added features}, such as: weekday of accident, core working hours, reporting delay, etc.
+\item \textbf{Excluded observations} with implausible set of predictors
 \end{itemize}
 \end{frame}
 
@@ -157,7 +168,12 @@ The preprocessing consisted of the following major steps: (purely technical step
 \section{Text analysis}
 \begin{frame}
 \frametitle{Text analysis}
-\emph{Try to classify sentences based on word occurrence. Weight clusters of words based on median ultimate.}
+Our analysis of the claim description feature:
+\begin{itemize}
+\item \textbf{Extraction and stemming} of the most common words (in this step laceration and lacerated both become "lacer")
+\item \textbf{Clustering and weighting} of the words according to median ultimate claim cost
+\item \textbf{One hot encoding} for every single word identified
+\end{itemize}
 
 
 \includegraphics[width=\textwidth]{./images/claimdescription.png}
@@ -170,46 +186,16 @@ The preprocessing consisted of the following major steps: (purely technical step
 \frametitle{Model}
 The algorithm relied on the following ensemble techniques:
 \begin{itemize}
-	\item boosting: gradient boosting using xgboost
-	\item bagging: radom forest as base learner
-	\item voting: custom combination based on insight
+	\item \textbf{Boosting}: gradient boosting using xgboost
+	\item \textbf{Bagging}: radom forest as base learner
+	\item \textbf{Voting}: custom combination based on insight
 \end{itemize}
 Further details:
 \begin{itemize}
-	\item natural logarithm as link function
-	\item tweedie distribution of errors
-	\item monotonic constraints for selected features, e.g. WeeklyWages
+	\item Natural logarithm as link function
+	\item Tweedie distribution of errors
+	\item Monotonic constraints for selected features, e.g. WeeklyWages
 \end{itemize}
 \end{frame}
-
-%------------------------------------------------
-
-\section{Conclusions}
-\begin{frame}
-\frametitle{What worked and what didn't}
-%\begin{columns}
-%	\begin{column}{0.5\textwidth}
- 	  	\begin{exampleblock}{\begin{center}What worked\end{center}}
-			\justifying
-			\begin{itemize}
-  				\item Single word analysis;
- 				\item Regression to distribution;
-  				\item \emph{Stacking with expert judgement (cooking).}
-  			\end{itemize}
-		\end{exampleblock}
-%	\end{column}
-%	\begin{column}{0.5\textwidth}  
-		\begin{alertblock}{\begin{center}What didn't work\end{center}}
-			\begin{itemize}
-  				\item Neural networks;
- 				\item External data sources (e.g. for inflation);
-  				\item \emph{Something about NLP? Like with entity analysis?}
-  			\end{itemize}
-		\end{alertblock}
-%	\end{column}
-%\end{columns}
-\end{frame}
-
-%----------------------------------------------------------------------------------------
 
 \end{document} 
