@@ -15,6 +15,8 @@
 %	PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
 
+% !TeX program = lualatex
+
 \documentclass{beamer}
 
 \newcommand\mybeamerex[2]{%
@@ -105,7 +107,7 @@
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title{An xgboost solution for Actuarial Loss Prediction} % The short title appears at the bottom of every slide, the full title is only on the title page
+\title{2nd place solution for Actuarial Loss Prediction} % The short title appears at the bottom of every slide, the full title is only on the title page
 
 \author{A. Guly\'{a}s \& N. Fornasin} % Your name
 \institute[ALU] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
@@ -142,12 +144,12 @@ Team Boosted Goose\\ % Your institution for the title page
 %\subsection*{The $a$ invariant}
 \begin{frame}
 \frametitle{Preprocessing}
-We used pandas because sklearn's pipelines have been designed with the intention of making me angry (it worked). What we did in preprocessing
+The preprocessing consisted of the following major steps: (purely technical steps are not listed)
 \begin{itemize}
-\item Corrected mistakes, such as: 200 hours worked per week, reporting date before accident date...
-\item Added features, such as: weekday of accident, core working hours, numeric transformations.
+\item Adjusted unrealistic values of the predictors (e.g. 200 hours worked per week, reporting date before accident date, etc.)
+\item Added features, such as: weekday of accident, core working hours, reporting delay, etc.
+\item Excluded observations with inplausible set of predictors
 \end{itemize}
-It wasn't fancy but it did what it had to, which is more than you can ask.
 \end{frame}
 
 %------------------------------------------------
@@ -163,10 +165,21 @@ It wasn't fancy but it did what it had to, which is more than you can ask.
 
 %------------------------------------------------
 
-\section{ML Algorithm}
+\section{Model}
 \begin{frame}
-\frametitle{ML Algorithm}
-After several attempts we decided to focus on a gradient boosted tree. \emph{Write something about ensemble techniques and the number of parallel trees and all these things.}
+\frametitle{Model}
+The algorithm relied on the following ensemble techniques:
+\begin{itemize}
+	\item boosting: gradient boosting using xgboost
+	\item bagging: radom forest as base learner
+	\item voting: custom combination based on insight
+\end{itemize}
+Further details:
+\begin{itemize}
+	\item natural logarithm as link function
+	\item tweedie distribution of errors
+	\item monotonic constraints for selected features, e.g. WeeklyWages
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
