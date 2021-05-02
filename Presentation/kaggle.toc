@@ -1,4 +1,4 @@
-\beamer@sectionintoc {1}{Preprocessing}{2}{0}{1}
-\beamer@sectionintoc {2}{Text analysis}{3}{0}{2}
-\beamer@sectionintoc {3}{Model}{4}{0}{3}
-\beamer@sectionintoc {4}{Conclusions}{5}{0}{4}
+\beamer@sectionintoc {1}{Overview}{2}{0}{1}
+\beamer@sectionintoc {2}{Preprocessing}{3}{0}{2}
+\beamer@sectionintoc {3}{Text analysis}{4}{0}{3}
+\beamer@sectionintoc {4}{Model}{5}{0}{4}
