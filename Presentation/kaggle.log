@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.8.8)  2 MAY 2021 15:19
+This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.8.8)  4 MAY 2021 09:31
  restricted system commands enabled.
  file:line:error style messages enabled.
 **kaggle.tex
@@ -35,7 +35,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.181 seconds
+luaotfload | main : initialization completed in 0.191 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2018/02/20 v3.50 A class for typesetting presentations
@@ -1135,11 +1135,11 @@ ex-cache/generic/fonts/otl/lmsans12-regular.luc) [1{/usr/local/texlive/2018/texm
 f-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-<./images/modeldiagram.png, id=63, 1028.84375pt x 277.035pt>
+<./images/modeldiagram.png, id=63, 1052.93375pt x 308.15125pt>
 File: ./images/modeldiagram.png Graphic file (type png)
 <use ./images/modeldiagram.png>
 Package luatex.def Info: ./images/modeldiagram.png  used on input line 156.
-(luatex.def)             Requested size: 307.28987pt x 82.74336pt.
+(luatex.def)             Requested size: 307.28987pt x 89.93051pt.
 LaTeX Font Info:    Try loading font information for U+msa on input line 156.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1210,7 +1210,7 @@ e, 1 pdf_start_link, 1 pdf_end_link, 1 pdf_action, 54 pdf_colorstack nodes
 tf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmsans8-regular.
 otf></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msam
 10.pfb>
-Output written on kaggle.pdf (5 pages, 136340 bytes).
+Output written on kaggle.pdf (5 pages, 153934 bytes).
 
 PDF statistics: 216 PDF objects out of 1000 (max. 8388607)
  179 compressed objects within 2 object streams
