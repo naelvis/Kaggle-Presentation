@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.8.8)  4 MAY 2021 09:31
+This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.8.8)  5 MAY 2021 16:58
  restricted system commands enabled.
  file:line:error style messages enabled.
 **kaggle.tex
@@ -35,7 +35,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.191 seconds
+luaotfload | main : initialization completed in 0.199 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2018/02/20 v3.50 A class for typesetting presentations
@@ -1135,44 +1135,47 @@ ex-cache/generic/fonts/otl/lmsans12-regular.luc) [1{/usr/local/texlive/2018/texm
 f-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-<./images/modeldiagram.png, id=63, 1052.93375pt x 308.15125pt>
+<./images/modeldiagram.png, id=63, 976.64874pt x 456.70625pt>
 File: ./images/modeldiagram.png Graphic file (type png)
 <use ./images/modeldiagram.png>
-Package luatex.def Info: ./images/modeldiagram.png  used on input line 156.
-(luatex.def)             Requested size: 307.28987pt x 89.93051pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 156.
- (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
+Package luatex.def Info: ./images/modeldiagram.png  used on input line 150.
+(luatex.def)             Requested size: 307.28987pt x 143.69597pt.
+ [2
+
+<./images/modeldiagram.png>]
+LaTeX Font Info:    Try loading font information for U+msa on input line 164.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 156.
+LaTeX Font Info:    Try loading font information for U+msb on input line 164.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 156.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 164.
 (load luc: /usr/local/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmsa
 ns10-oblique.luc)
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 156.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 164.
 (load luc: /usr/local/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmsa
 ns8-oblique.luc)
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 156.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 164.
 (load luc: /usr/local/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmsa
-ns10-bold.luc) [2
-
-<./images/modeldiagram.png>] [3
+ns10-bold.luc) [3
 
 ]
 <./images/claimdescription.png, id=125, 1023.825pt x 219.82124pt>
 File: ./images/claimdescription.png Graphic file (type png)
 <use ./images/claimdescription.png>
-Package luatex.def Info: ./images/claimdescription.png  used on input line 186.
+Package luatex.def Info: ./images/claimdescription.png  used on input line 180.
 (luatex.def)             Requested size: 307.28987pt x 65.97707pt.
  [4
 
-<./images/claimdescription.png>] [5
+<./images/claimdescription.png>]
+[5
 
 ]
 \tf@nav=\write6
@@ -1184,11 +1187,11 @@ Package luatex.def Info: ./images/claimdescription.png  used on input line 186.
 \tf@snm=\write8
 
 \openout8 = kaggle.snm
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 207.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 207.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 201.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 201.
  (./kaggle.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 207.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 207.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 201.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 201.
 Package rerunfilecheck Info: File `kaggle.out' has not changed.
 (rerunfilecheck)             Checksum: 3B36E8E42A1EDE2924E652FB16A317E6;179.
 )
@@ -1210,7 +1213,7 @@ e, 1 pdf_start_link, 1 pdf_end_link, 1 pdf_action, 54 pdf_colorstack nodes
 tf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmsans8-regular.
 otf></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msam
 10.pfb>
-Output written on kaggle.pdf (5 pages, 153934 bytes).
+Output written on kaggle.pdf (5 pages, 179799 bytes).
 
 PDF statistics: 216 PDF objects out of 1000 (max. 8388607)
  179 compressed objects within 2 object streams
