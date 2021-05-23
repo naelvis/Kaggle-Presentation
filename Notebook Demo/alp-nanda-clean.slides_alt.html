@@ -14459,10 +14459,10 @@ div.jp-OutputPrompt {
 </div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[83]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14484,27 +14484,27 @@ div.jp-OutputPrompt {
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre> ClaimNumber        DateTimeOfAccident             DateReported       
- Length:54000       Min.   :1988-01-01 09:00:00   Min.   :1988-01-08  
- Class :character   1st Qu.:1992-06-30 07:00:00   1st Qu.:1992-08-04  
- Mode  :character   Median :1997-01-07 10:00:00   Median :1997-02-16  
-                    Mean   :1997-01-03 05:08:31   Mean   :1997-02-11  
-                    3rd Qu.:2001-07-09 11:00:00   3rd Qu.:2001-08-25  
-                    Max.   :2005-12-31 10:00:00   Max.   :2006-09-23  
-      Age     Gender    MaritalStatus DependentChildren DependentsOther 
- Min.   :13   M:41660   M:22516       Min.   :0.00      Min.   :0.0000  
- 1st Qu.:23   F:12338   U: 5294       1st Qu.:0.00      1st Qu.:0.0000  
- Median :32   U:    2   S:26161       Median :0.00      Median :0.0000  
- Mean   :34              :   29       Mean   :0.12      Mean   :0.0099  
- 3rd Qu.:43                           3rd Qu.:0.00      3rd Qu.:0.0000  
- Max.   :81                           Max.   :9.00      Max.   :5.0000  
-  WeeklyWages   PartTimeFullTime HoursWorkedPerWeek DaysWorkedPerWeek
- Min.   :   1   F:49112          Min.   :  0        Min.   :1.0      
- 1st Qu.: 200   P: 4888          1st Qu.: 38        1st Qu.:5.0      
- Median : 392                    Median : 38        Median :5.0      
- Mean   : 416                    Mean   : 38        Mean   :4.9      
- 3rd Qu.: 500                    3rd Qu.: 40        3rd Qu.:5.0      
- Max.   :7497                    Max.   :640        Max.   :7.0      
+<pre> ClaimNumber        DateTimeOfAccident             DateReported                
+ Length:54000       Min.   :1988-01-01 09:00:00   Min.   :1988-01-08 00:00:00  
+ Class :character   1st Qu.:1992-06-30 07:00:00   1st Qu.:1992-08-04 00:00:00  
+ Mode  :character   Median :1997-01-07 10:00:00   Median :1997-02-16 00:00:00  
+                    Mean   :1997-01-03 05:08:31   Mean   :1997-02-11 01:00:17  
+                    3rd Qu.:2001-07-09 11:00:00   3rd Qu.:2001-08-25 00:00:00  
+                    Max.   :2005-12-31 10:00:00   Max.   :2006-09-23 00:00:00  
+      Age        Gender    MaritalStatus DependentChildren DependentsOther   
+ Min.   :13.00   M:41660   M:22516       Min.   :0.0000    Min.   :0.000000  
+ 1st Qu.:23.00   F:12338   U: 5294       1st Qu.:0.0000    1st Qu.:0.000000  
+ Median :32.00   U:    2   S:26161       Median :0.0000    Median :0.000000  
+ Mean   :33.84              :   29       Mean   :0.1192    Mean   :0.009944  
+ 3rd Qu.:43.00                           3rd Qu.:0.0000    3rd Qu.:0.000000  
+ Max.   :81.00                           Max.   :9.0000    Max.   :5.000000  
+  WeeklyWages     PartTimeFullTime HoursWorkedPerWeek DaysWorkedPerWeek
+ Min.   :   1.0   F:49112          Min.   :  0.00     Min.   :1.000    
+ 1st Qu.: 200.0   P: 4888          1st Qu.: 38.00     1st Qu.:5.000    
+ Median : 392.2                    Median : 38.00     Median :5.000    
+ Mean   : 416.4                    Mean   : 37.74     Mean   :4.906    
+ 3rd Qu.: 500.0                    3rd Qu.: 40.00     3rd Qu.:5.000    
+ Max.   :7497.0                    Max.   :640.00     Max.   :7.000    
  ClaimDescription   InitialIncurredCalimsCost UltimateIncurredClaimCost
  Length:54000       Min.   :      1           Min.   :    122          
  Class :character   1st Qu.:    700           1st Qu.:    926          
