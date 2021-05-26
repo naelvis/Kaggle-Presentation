@@ -14397,7 +14397,7 @@ div.jp-OutputPrompt {
 </div>
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Aim-of-the-competition">Aim of the competition<a class="anchor-link" href="#Aim-of-the-competition">&#182;</a></h2><p>The aim of the competition was to predict ultimate costs on a single claim basis for worker's compensation insurance. In other words, the task was to develop an <strong>individual claim reserving model</strong>.</p>
+<h2 id="Aim-of-the-competition">Aim of the competition<a class="anchor-link" href="#Aim-of-the-competition">&#182;</a></h2><p>The aim of the competition was to predict ultimate costs on a single claim basis for worker's compensation insurance. In other words, the task was to develop an <strong>individual claim reserving model</strong> for IBNeR. (Incurred but not <em>enough</em> Reported)</p>
 <p>The data source was a synthetically generated dataset, not specific to any legal jurisdiction or country. It included among others generic anagraphical data of the workers, a text description of the claim and a first estimate of the ultimate cost.</p>
 <p>Submissions were scored on the root mean squared error.</p>
 
@@ -14450,13 +14450,17 @@ div.jp-OutputPrompt {
 
 </div>
 
-</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Feature-overview">Feature overview<a class="anchor-link" href="#Feature-overview">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="nf">select_if</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">is.character</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14473,34 +14477,46 @@ div.jp-OutputPrompt {
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre> ClaimNumber        DateTimeOfAccident             DateReported       
- Length:54000       Min.   :1988-01-01 09:00:00   Min.   :1988-01-08  
- Class :character   1st Qu.:1992-06-30 07:00:00   1st Qu.:1992-08-04  
- Mode  :character   Median :1997-01-07 10:00:00   Median :1997-02-16  
-                    Mean   :1997-01-03 05:08:31   Mean   :1997-02-11  
-                    3rd Qu.:2001-07-09 11:00:00   3rd Qu.:2001-08-25  
-                    Max.   :2005-12-31 10:00:00   Max.   :2006-09-23  
-      Age     Gender    MaritalStatus DependentChildren DependentsOther 
- Min.   :13   M:41660   M:22516       Min.   :0.00      Min.   :0.0000  
- 1st Qu.:23   F:12338   U: 5294       1st Qu.:0.00      1st Qu.:0.0000  
- Median :32   U:    2   S:26161       Median :0.00      Median :0.0000  
- Mean   :34              :   29       Mean   :0.12      Mean   :0.0099  
- 3rd Qu.:43                           3rd Qu.:0.00      3rd Qu.:0.0000  
- Max.   :81                           Max.   :9.00      Max.   :5.0000  
-  WeeklyWages   PartTimeFullTime HoursWorkedPerWeek DaysWorkedPerWeek
- Min.   :   1   F:49112          Min.   :  0        Min.   :1.0      
- 1st Qu.: 200   P: 4888          1st Qu.: 38        1st Qu.:5.0      
- Median : 392                    Median : 38        Median :5.0      
- Mean   : 416                    Mean   : 38        Mean   :4.9      
- 3rd Qu.: 500                    3rd Qu.: 40        3rd Qu.:5.0      
- Max.   :7497                    Max.   :640        Max.   :7.0      
- ClaimDescription   InitialIncurredCalimsCost UltimateIncurredClaimCost
- Length:54000       Min.   :      1           Min.   :    122          
- Class :character   1st Qu.:    700           1st Qu.:    926          
- Mode  :character   Median :   2000           Median :   3371          
-                    Mean   :   7841           Mean   :  11003          
-                    3rd Qu.:   9500           3rd Qu.:   8197          
-                    Max.   :2000000           Max.   :4027136          </pre>
+<pre> ClaimNumber        ClaimDescription  
+ Length:54000       Length:54000      
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  </pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-r"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="nf">select_if</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">is.factor</span><span class="p">),</span> <span class="n">digits</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre> Gender    MaritalStatus PartTimeFullTime
+ M:41660   M:22516       F:49112         
+ F:12338   U: 5294       P: 4888         
+ U:    2   S:26161                       
+            :   29                       </pre>
 </div>
 
 </div>
@@ -14511,7 +14527,83 @@ div.jp-OutputPrompt {
 
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Title...">Title...<a class="anchor-link" href="#Title...">&#182;</a></h2>
+<h2 id="Feature-overview-(con't.)">Feature overview (con't.)<a class="anchor-link" href="#Feature-overview-(con't.)">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-r"><pre><span></span><span class="nf">summary</span><span class="p">(</span><span class="nf">select</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">Age</span><span class="p">,</span> <span class="n">DependentChildren</span><span class="p">,</span><span class="n">DependentsOther</span><span class="p">),</span> <span class="n">digits</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="nf">select</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">WeeklyWages</span><span class="p">,</span><span class="n">HoursWorkedPerWeek</span><span class="p">,</span><span class="n">DaysWorkedPerWeek</span><span class="p">),</span> <span class="n">digits</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="nf">select</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">InitialIncurredCalimsCost</span><span class="p">,</span> <span class="n">UltimateIncurredClaimCost</span><span class="p">),</span> <span class="n">digits</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>      Age     DependentChildren DependentsOther 
+ Min.   :13   Min.   :0.00      Min.   :0.0000  
+ 1st Qu.:23   1st Qu.:0.00      1st Qu.:0.0000  
+ Median :32   Median :0.00      Median :0.0000  
+ Mean   :34   Mean   :0.12      Mean   :0.0099  
+ 3rd Qu.:43   3rd Qu.:0.00      3rd Qu.:0.0000  
+ Max.   :81   Max.   :9.00      Max.   :5.0000  </pre>
+</div>
+
+</div>
+
+<div class="jp-OutputArea-child">
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>  WeeklyWages   HoursWorkedPerWeek DaysWorkedPerWeek
+ Min.   :   1   Min.   :  0        Min.   :1.0      
+ 1st Qu.: 200   1st Qu.: 38        1st Qu.:5.0      
+ Median : 392   Median : 38        Median :5.0      
+ Mean   : 416   Mean   : 38        Mean   :4.9      
+ 3rd Qu.: 500   3rd Qu.: 40        3rd Qu.:5.0      
+ Max.   :7497   Max.   :640        Max.   :7.0      </pre>
+</div>
+
+</div>
+
+<div class="jp-OutputArea-child">
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre> InitialIncurredCalimsCost UltimateIncurredClaimCost
+ Min.   :      1           Min.   :    122          
+ 1st Qu.:    700           1st Qu.:    926          
+ Median :   2000           Median :   3371          
+ Mean   :   7841           Mean   :  11003          
+ 3rd Qu.:   9500           3rd Qu.:   8197          
+ Max.   :2000000           Max.   :4027136          </pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Initial-vs-Ultimate-Claim-Cost">Initial vs Ultimate Claim Cost<a class="anchor-link" href="#Initial-vs-Ultimate-Claim-Cost">&#182;</a></h2>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell    celltag_hide-input">
 
@@ -22914,7 +23006,11 @@ height=600
 
 </div>
 
-</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="A-glimpse-into-the-first-20-claim-descriptions">A glimpse into the first 20 claim descriptions<a class="anchor-link" href="#A-glimpse-into-the-first-20-claim-descriptions">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
@@ -22976,8 +23072,22 @@ height=600
 
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Distribution-of-the-ultimate-claim-varied-by-type-of-injury">Distribution of the ultimate claim varied by type of injury<a class="anchor-link" href="#Distribution-of-the-ultimate-claim-varied-by-type-of-injury">&#182;</a></h2>
+<h2 id="Ouch,-lower-back-pain...">Ouch, lower back pain...<a class="anchor-link" href="#Ouch,-lower-back-pain...">&#182;</a></h2>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-r"><pre><span></span><span class="n">output_b</span> <span class="o">&lt;-</span> <span class="n">output</span> <span class="o">%&gt;%</span> <span class="nf">mutate</span><span class="p">(</span><span class="n">Back</span> <span class="o">=</span> <span class="nf">str_detect</span><span class="p">(</span><span class="n">ClaimDescription</span><span class="p">,</span> <span class="s">&quot;BACK&quot;</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell    celltag_hide-input">
 
 <div class="jp-Cell-outputWrapper">
@@ -23862,7 +23972,11 @@ height=600
 
 </div>
 
-</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Wordcloud-of-claim-descriptions">Wordcloud of claim descriptions<a class="anchor-link" href="#Wordcloud-of-claim-descriptions">&#182;</a></h2>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
