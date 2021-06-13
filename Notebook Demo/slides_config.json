@@ -1,0 +1,11 @@
+{
+"TagRemovePreprocessor": {"remove_input_tags":["hide-input"]},
+"SlidesExporter": {"reveal_theme": "simple"},
+"NbConvertApp": {
+"export_format": "slides"
+},
+"TemplateExporter":{
+"exclude_input_prompt": true,
+"exclude_output_prompt": true
+}
+}
