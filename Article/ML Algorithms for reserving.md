@@ -4,11 +4,11 @@
 
 ## Introduction
 
-There is much ado about data science and machine learning these days. ML algorithms can identify pictures of traffic lights and drive cars: from an actuarial perspective, the next step is necessarily that they be able to adequately reserve for accidents they might cause.
+Machine learning advances at an unprecedented pace these days. ML algorithms can read traffic lights and are expected to drive cars soon. From an actuarial perspective, the next step is necessarily that they adequately reserve for accidents they might cause.
 
-Jokes aside, the question of how and how much such algorithms can be integrated in the reserving processes of insurance companies is very real and urgent. Companies making use of these new solutions might gain a huge competitive advantage in the market, on the other laying themselves open to their critical aspects, for example lack of transparency.
+Jokes aside, the question of how and how much such algorithms can be integrated into the reserving processes of insurance companies is very real and urgent. Companies making use of these new solutions might gain an edge over their competitors, on the other laying themselves open to their critical aspects, for example lack of transparency.
 
-The Kaggle competition "Actuarial Loss Prediction" (ALP) has been for the authors a good place to start understanding the issue and gain some practical insight. Kaggle is the leading platform for online data science competitions, with a community of over 8 millions of user. The competition was presented as follows:
+The "Actuarial Loss Prediction" (ALP) competition aimed to further this discussion by creating a reserving challenge that goes beyond conventional methods. The challenge was hosted on Kaggle, the leading platform for data science competitions with a community of over 8 million data scientists, and was presented as follows:
 
 > The Actuaries Institute of Australia, Institute and Faculty of Actuaries and the Singapore Actuarial Society are delighted to host the Actuarial loss prediction competition 2020/21 to promote development of data analytics talent especially among actuaries. The challenge is to predict Workers Compensation claims using highly realistic synthetic data.
 >
@@ -16,41 +16,49 @@ The Kaggle competition "Actuarial Loss Prediction" (ALP) has been for the author
 >
 > We invite the competitors to take claims inflation into account.
 
-ALP ran from December 2020 to April 2021, keeping 140 teams of actuaries and data scientists busy. At the end we retained the second place and some good insights about how machine learning in reserving might look like in the future, which we would like to share in this article.
+The ALP ran from December 2020 to April 2021, keeping 140 teams of actuaries and data scientists busy. At the end we retained the second place and some good insights about how machine learning in reserving might look like in the future, which we would like to share in this article.
 
 ## Aim of the competition
 
-The introducing text of ALP already provides a succint description of the aim: "The challenge is to predict Workers Compensation claims using highly realistic synthetic data.". In this section we provide a bit more detail on the aim of the competition and the scoring system.
+The introduction of the ALP already provides a succint description of the aim: "The challenge is to predict Workers Compensation claims using highly realistic synthetic data.". In this section we provide a bit more detail on the aim of the competition and the scoring metric.
 
-The 90.000 rows dataset was divided in a train set (54.000 rows), test set (18.000 rows) and validation set (18.000 rows), with each row containing the following data fields:
+The 90.000 rows dataset was divided into a train set (54.000 rows) and a test set (36.000 rows). Approximately 50% of the test data was retained by the competition host and only used once for the final evaluation of the models. 
+
+The typical ML workflow is to train the algorithm on the train set and check its predictions on a validation set, to make sure it is not too tightly tailored to the data it was trained upon. Based on the results on the validation set the model is fine-tuned, and in the last step - to check whether the model was indirectly tailored upon the validation dataset - the model is evaluated on the unseen test set. An algorithm that is able to perform on the test set has generalized well and successfully neglected the idiosyncracies of the training data. 
+
+In this competition the predictions were scored according to the root mean squared error (RMSE).
+
+## Data Exploration
+
+The train dataset contained the fields below. The test dataset contained the same fields except for the explained variable *UltimateIncurredClaimCost*.
 
 - **ClaimNumber**: Unique policy identifier
 - **DateTimeOfAccident**: Date and time of accident
-- **DateReported**: Date that accident was reported
-- **Age**: Age of worker
-- **Gender**: Gender of worker
-- **MaritalStatus**: Martial status of worker. (M)arried, (S)ingle, (U)nknown.
+- **DateReported**: Date the accident was reported
+- **Age**: Age of the worker
+- **Gender**: Gender of the worker
+- **MaritalStatus**: Martial status of the worker: (M)arried, (S)ingle, (U)nknown
 - **DependentChildren**: The number of dependent children
 - **DependentsOther**: The number of dependants excluding children
 - **WeeklyWages**: Total weekly wage
-- **PartTimeFullTime**: Binary (P) or (F)
+- **PartTimeFullTime**: Whether the worker was employed (P)art time or (F)ull time
 - **HoursWorkedPerWeek**: Total hours worked per week
 - **DaysWorkedPerWeek**: Number of days worked per week
 - **ClaimDescription**: Free text description of the claim
 - **InitialIncurredClaimCost**: Initial estimate by the insurer of the claim cost
-- **UltimateIncurredClaimCost**: Total claims payments by the insurance company. 
+- **UltimateIncurredClaimCost**: Total claims payments by the insurance company
 
-The last field is the field that needed to be predicted. 
+Outliers were removed or recoded based on expert judgment. Some new features were added, e.g. whether the accident happened within core working hours. Date(time) features were also used to create new variables, such as reporting delay. The explanatory variables were partly transformed to alleviate or reinforce the effect of extreme data points. For instance, polynomial features were created for the variables *DependentChildren*, *DependentsOther*.
 
-The typical ML workflow is to train the algorithm on the train dataset and check its predictions on the test dataset, to make sure it is not too tightly tailored on the data it was trained upon. Based on the results on the test dataset the algorithms is tweaked, and in the very last step - to check whether the model was indirectly tailored upon the test dataset - the model runs on the never seen before validation dataset. An algorithm able to perform well and equally well on the train, test and validation dataset has captured the general features of the problem and neglected idiosincracies of the single datasets. 
-
-For this competition the predictions were scored according to the root mean squared error (RMSE)
-
-## Data Exploration
+Different large claim thresholds were tested for different kinds of models. Moreover, several models were calibrated for large claims. However, explicit large claim modelling did not lead to significant model improvements. Therefore, the large claims were accounted for implicitly in the final model.
 
 ## Natural Language Processing
 
-## Modelling with xgboost 4076
+The chapter is titled Natural Language Processing (NLP) because one of the most influential variable, the *ClaimDescription* was analyzed with NLP techniques. However, these techniques could not be fully made use of because in some cases the descriptions had been distorted to a point where the semantics of the language become hardly recognizable. For instance, the description "TO RIGHT LEG RIGHT KNEE" is difficult to interpret.
+
+
+
+## Modelling with xgboost
 
 We implemented our model in Python making use of the xgboost library. In the words of its own authors this library "implements machine learning algorithms under the Gradient Boosting framework", and we applied it to boost a random forest algorithm. 
 
