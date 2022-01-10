@@ -109,7 +109,15 @@ From the plot we can see that the major improvement is given by inserting boosti
 
 We also see this in Figure Y, which compares drop in RMSE after each boosting round for a model with squared error and tweedie likelihood loss function: this drop is much more regular for the squared error loss function, which is directly related to RMSE, and more of a side effect for the tweedie likelihood loss function - it takes the model x boosting rounds to find the right distribution parameters - the RMSE then falls because we found a good fit.
 
-### True data
+### Backtesting
+
+The input data for the prediction contained an initial estimation for the ultimate cost. The model essentially took and refined this initial estimation using the remaining predictors.
+
+Figure Z shows the distribution of the logarithm of the ultimate for the initial estimation, the prediction and the true ultimate in the train data:
+
+![UltimateComparison](/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots/UltimateComparison.png)
+
+One of the main banes of this challenge was the prediction of large losses, which repeatedly led the model astray.
 
 ## Conclusion
 
