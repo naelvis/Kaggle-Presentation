@@ -56,8 +56,6 @@ Different large claim thresholds were tested for different kinds of models. More
 
 The chapter is titled Natural Language Processing (NLP) because one of the most influential variable, the *ClaimDescription* was analyzed with NLP techniques. However, these techniques could not be fully made use of because in some cases the descriptions had been distorted to a point where the semantics of the language become hardly recognizable. For instance, the description "TO RIGHT LEG RIGHT KNEE" is difficult to interpret.
 
-
-
 ## Modelling with xgboost
 
 We implemented our model in Python making use of the xgboost library. In the words of its own authors this library "implements machine learning algorithms under the Gradient Boosting framework", and we applied it to boost a random forest algorithm. 
@@ -75,7 +73,7 @@ In combining random forests and gradient boosting we refine the classic decision
 
 ### Regression to distributions in xgboost
 
-Suppose that we want to predict a numerical outcome Y based on a set of n dependent variables X1, ..., Xn, and that we suspect Y to be gamma distributed with mean mu: a common way to approach this regression problem would be to set up a generalized linear model (GLM) around the equation -1/mu = g(mu) = betaX, where the betas are regression parameters to be determined. We can determine the betas by maximing likelihood.
+Suppose that we want to predict a numerical outcome Y based on a set of n dependent variables X1, ..., Xn, and that we suspect Y to be gamma distributed with mean mu: a common way to approach this regression problem would be to set up a generalized linear model (GLM) around the equation log(mu) = g(mu) = betaX, where the betas are regression parameters to be determined. We can determine the betas by maximizing likelihood.
 
 This approach cannot be translated directly to decision trees, which describe the outcome Y in term of piecewise constant functions rather than polynomials. But it is possible to introduce the likelihood in the computation via the loss function. We explain this important point in more detail.
 
@@ -83,23 +81,33 @@ The learning process of a machine learning algorithm is guided by minimizing a l
 
 Loss functions are in principle fully customizable, but xgboost already provides a wide selection, including the negative of the likelihood to logistic, gamma and tweedie distributions. Minimizing the negative of the likelihood obviously maximizes the likelihood; this is however not achieved (as in GLMs) by finding the optimal betas, but by finding the best splits for each decision tree.
 
-## Results
+## Model analysis
 
-In this article we wrote about different techniques to analyse and model data. In this section we compare different versions of our model. This is our final model: insert list of parameters. In the following sections we modify single aspects and look at differences in model performance.
+An xgboost model can be quite complex. These are some of the parameters that need to be set, with some sample values:
 
-### Random forest
+    'objective':'reg:gamma,
+    'eval_metric':'rmse',
+    'eta': 5e-2,
+    'max_depth': 4,
+    'min_child_weight': 6,
+    'subsample': 0.7,
+    'num_parallel_trees': 50
+    'alpha' : 2e+2
 
-The plot below shows the difference between a model with random forest (50 trees) and a model with only one tree:
+For a description and complete list of parameters, please see the official documentation at https://xgboost.readthedocs.io/en/latest/parameter.html. We still need to choose how many boosting rounds we would like to perform, then we can train a model as follows (Python):
 
-Here there is a comment about the picture. Insert comment on runtime.
+```
+import xgboost as xgb
+xgb.train(params=parameters, dtrain=xgb.DMatrix(input_data, label=y), num_boost_round=300)
+```
 
-### Loss functions
+It is important to understand that the parameters interact with each other, and several optimal configurations might be possible. Moreover, the data is usually preprocessed to make it easier for the model to interpret: the preprocessing and feature engineering performed on the data interacts with the hyperparameter as well, so that the final model is much more than a simple sum of input data and hyperparameters.
 
+With this remark in mind, we would like to proceed to an analysis of the model to try and describe which aspects played the most important role in producing good predictions. In Figure X we display the RMSE of the predictions on the test dataset for different choices of hyperparameters and feature engineering: we considered all possible combinations of the three loss functions squared error, gamma distribution and tweedie distributions, NLP analysis (with/without), boosting (300 boosting rounds vs no boosting), bagging (random forest with 50 trees vs single tree).
 
+From the plot we can see that the major improvement is given by inserting boosting. It should also be noted that unboosted models essentially do not make use of the NLP features and are not powerful enough to detect the distribution behind the data: for unboosted models the squared error is by far the best loss function, for boosted models it is outperformed by tweedie likelihood. 
 
-### NLP
-
-
+We also see this in Figure Y, which compares drop in RMSE after each boosting round for a model with squared error and tweedie likelihood loss function: this drop is much more regular for the squared error loss function, which is directly related to RMSE, and more of a side effect for the tweedie likelihood loss function - it takes the model x boosting rounds to find the right distribution parameters - the RMSE then falls because we found a good fit.
 
 ### True data
 
