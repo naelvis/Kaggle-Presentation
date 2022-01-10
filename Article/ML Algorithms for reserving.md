@@ -105,13 +105,13 @@ It is important to understand that the parameters interact with each other, and 
 
 With this remark in mind, we would like to proceed to an analysis of the model to try and describe which aspects played the most important role in producing good predictions. In Figure X we display the RMSE of the predictions on the test dataset for different choices of hyperparameters and feature engineering: we considered all possible combinations of the three loss functions squared error, gamma distribution and tweedie distributions, NLP analysis (with/without), boosting (300 boosting rounds vs no boosting), bagging (random forest with 50 trees vs single tree).
 
-![ModelComparison](/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots/ModelComparison.png)
+![Model Comparison](https://raw.githubusercontent.com/naelvis/Kaggle-Presentation/main/Article/Plots/ModelComparison.png)
 
 From the plot we can see that the major improvement is given by inserting boosting. It should also be noted that unboosted models essentially do not make use of the NLP features and are not powerful enough to detect the distribution behind the data: for unboosted models the squared error is by far the best loss function, for boosted models it is outperformed by tweedie likelihood. 
 
 We also see this in Figure Y, which compares drop in RMSE after each boosting round for a model with squared error and tweedie likelihood loss function: this drop is much more regular for the squared error loss function, which is directly related to RMSE, and more of a side effect for the tweedie likelihood loss function. In the latter case the RMSE abruptly drops in the blue shaded area (boosting rounds 15 to 75) and then stabilizes again.
 
-![BoostingRounds](/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots/BoostingRounds.png)
+![Boosting for different loss functions](https://raw.githubusercontent.com/naelvis/Kaggle-Presentation/main/Article/Plots/BoostingRounds.png)
 
 ### Backtesting
 
@@ -119,15 +119,15 @@ The input data for the prediction contained an initial estimation for the ultima
 
 Figure Z shows the distribution of the logarithm of the ultimate for the initial estimation, the prediction and the true ultimate in the train data:
 
-![UltimateComparison](/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots/UltimateComparison.png)
+![Ultimate Comparison](https://raw.githubusercontent.com/naelvis/Kaggle-Presentation/main/Article/Plots/UltimateComparison.png)
 
 One of the main banes of this challenge was the prediction of large losses, which repeatedly led the model astray.
 
 ## Conclusion
 
-This competition was a useful exercise in machine learning and its potential in the insurance industry. While very little hard coding was necessary, we realised how important it was to have a good grasp of the theory behind the models: choosing to use random forests only leads to up to many more questions, for example what the maximal depth of the trees should be, or how many trees the random forest should be made up of[footnote]. Already choosing a range of hyperparameters has been at times challenging.
+This competition was a useful exercise in machine learning and its potential in the insurance industry. While very little hard coding was necessary, we realised how important it was to have a good grasp of the theory behind the models: choosing to use random forests only leads to up to many more questions, for example what the maximal depth of the trees should be, or how many trees the random forest should be made up of. Already choosing a range of hyperparameters has been at times challenging.
 
-We also tried several different machine learning algorithms, including neural networks. While boosting on neural network is a known concept (see X), an equivalent of xgboost is missing. So it is well possible that powerful models remain unused just because they are hard to implement with the available packages.
+We also tried several different machine learning algorithms, including neural networks. While boosting on neural network is a known concept (see https://arxiv.org/abs/2002.07971v2, thanks to alfredo for the link), an equivalent of xgboost is missing. So it is well possible that powerful models remain unused just because they are hard to implement with the available packages.
 
-Interpretability of the results remained a problem throughout. We used feature importance as a guideline and spent a lot of time looking at what the model was missing to understand how to improve our results. A straightforward way of interpreting is still not available and is perhaps just not achievable, given the way ML algorithms are constructed. This remains an open challenge for the future blah blah blah
+Interpretability of the results remained a problem throughout. We used feature importance as a guideline and spent a lot of time looking at what the model was missing to understand how to improve our results. A straightforward way of interpreting is still not available and is perhaps just not achievable, given the way ML algorithms are constructed. This remains an open challenge for the future.
 
