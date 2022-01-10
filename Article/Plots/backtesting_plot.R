@@ -140,3 +140,49 @@ ultimates_v6 <- original_ultimates %>%
   
 ggplot(ultimates_v6, aes(x = ultimate_percent, color = Type)) +
   geom_point(aes(y = Value))
+
+ultimates_v7 <- original_ultimates %>% 
+  select(InitialIncurredCalimsCost,UltimateIncurredClaimCost, Prediction) %>% 
+  pivot_longer(c(Prediction, UltimateIncurredClaimCost, InitialIncurredCalimsCost),
+               names_to = "Type",
+               values_to = "Value") %>% 
+  mutate(Type = ifelse(Type == "InitialIncurredCalimsCost",
+                       "Initial Estimation",
+                       Type),
+         Type = ifelse(Type == "UltimateIncurredClaimCost",
+                       "True Ultimate",
+                       Type))
+
+ggplot(ultimates_v7, aes(x = log(Value))) +
+  geom_density(aes(fill = Type), alpha = .5) +
+  geom_line(stat = "density") +
+  xlim(5, 13)+
+  facet_grid(.~Type) +
+  guides(fill = "none") +
+  labs(x="Logarithm of the ultimate",
+       y ="Density",
+       title = "Comparison of the ultimates")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+ppi <- 300
+png("UltimateComparison.png",
+    width = 4*ppi,
+    height = 4*ppi,
+    res = ppi)
+ggplot(ultimates_v7, aes(x = log(Value))) +
+  geom_density(aes(fill = Type), alpha = .5) +
+  geom_line(stat = "density") +
+  xlim(5, 13)+
+  facet_grid(.~Type) +
+  guides(fill = "none") +
+  labs(x="Logarithm of the ultimate",
+       y ="Density",
+       title = "Comparison of the ultimates")+
+  theme(plot.title = element_text(hjust = 0.5))
+dev.off()
+
+ggplot(ultimates_v7, aes(x = Value)) +
+  geom_density(aes(fill = Type), alpha = .5) +
+  geom_line(stat = "density") +
+  xlim(0, 50000)+
+  facet_grid(Type~.)

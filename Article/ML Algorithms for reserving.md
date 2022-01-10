@@ -105,9 +105,13 @@ It is important to understand that the parameters interact with each other, and 
 
 With this remark in mind, we would like to proceed to an analysis of the model to try and describe which aspects played the most important role in producing good predictions. In Figure X we display the RMSE of the predictions on the test dataset for different choices of hyperparameters and feature engineering: we considered all possible combinations of the three loss functions squared error, gamma distribution and tweedie distributions, NLP analysis (with/without), boosting (300 boosting rounds vs no boosting), bagging (random forest with 50 trees vs single tree).
 
+![ModelComparison](/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots/ModelComparison.png)
+
 From the plot we can see that the major improvement is given by inserting boosting. It should also be noted that unboosted models essentially do not make use of the NLP features and are not powerful enough to detect the distribution behind the data: for unboosted models the squared error is by far the best loss function, for boosted models it is outperformed by tweedie likelihood. 
 
-We also see this in Figure Y, which compares drop in RMSE after each boosting round for a model with squared error and tweedie likelihood loss function: this drop is much more regular for the squared error loss function, which is directly related to RMSE, and more of a side effect for the tweedie likelihood loss function - it takes the model x boosting rounds to find the right distribution parameters - the RMSE then falls because we found a good fit.
+We also see this in Figure Y, which compares drop in RMSE after each boosting round for a model with squared error and tweedie likelihood loss function: this drop is much more regular for the squared error loss function, which is directly related to RMSE, and more of a side effect for the tweedie likelihood loss function. In the latter case the RMSE abruptly drops in the blue shaded area (boosting rounds 15 to 75) and then stabilizes again.
+
+![BoostingRounds](/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots/BoostingRounds.png)
 
 ### Backtesting
 
