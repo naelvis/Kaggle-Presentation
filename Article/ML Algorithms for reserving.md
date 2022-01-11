@@ -54,7 +54,13 @@ Different large claim thresholds were tested for different kinds of models. More
 
 ## Natural Language Processing
 
-The chapter is titled Natural Language Processing (NLP) because one of the most influential variable, the *ClaimDescription* was analyzed with NLP techniques. However, these techniques could not be fully made use of because in some cases the descriptions had been distorted to a point where the semantics of the language become hardly recognizable. For instance, the description "TO RIGHT LEG RIGHT KNEE" is difficult to interpret.
+The chapter is titled Natural Language Processing (NLP) because one of the most influential variable, the *ClaimDescription* was analyzed with NLP techniques.
+
+Google Cloud's natural language API implements the most common techniques (see https://cloud.google.com/natural-language/docs/basics), from overarching sentiment analysis, which describes the overall emotional content of a piece of text, to syntactic analysis, which breaks the text in sentences and tokens to be analyzed singularly.
+
+ In our case these techniques could not be fully made use of because on the one hand we only had short descriptions available, ruling out e.g. sentiment analysis, and on the other hand the descriptions had often been distorted to a point where the semantics of the language had become hardly recognizable, ruling out syntactic analysis. For instance, the description "TO RIGHT LEG RIGHT KNEE" is difficult to interpret.
+
+
 
 ## Modelling with xgboost
 
@@ -73,13 +79,27 @@ In combining random forests and gradient boosting we refine the classic decision
 
 ### Regression to distributions in xgboost
 
-Suppose that we want to predict a numerical outcome Y based on a set of n dependent variables X1, ..., Xn, and that we suspect Y to be gamma distributed with mean mu: a common way to approach this regression problem would be to set up a generalized linear model (GLM) around the equation log(mu) = g(mu) = betaX, where the betas are regression parameters to be determined. We can determine the betas by maximizing likelihood.
+Suppose that we want to predict a numerical outcome Y based on a set of n dependent $X_1,\dots, X_n$, and that we suspect $Y$ to be gamma distributed with mean mu: a common way to approach this regression problem would be to set up a generalized linear model (GLM) around the equation 
 
-This approach cannot be translated directly to decision trees, which describe the outcome Y in term of piecewise constant functions rather than polynomials. But it is possible to introduce the likelihood in the computation via the loss function. We explain this important point in more detail.
+$$\log(\mu) = g(\mu) = \beta X$$ 
 
-The learning process of a machine learning algorithm is guided by minimizing a loss function. Given a vector of true values Y and of model outcomes Yhat we can for example ask for the Yhat that minimizes the squared error: insert equation or the squared log error: insert equation. One typical issue of the squared error is that it is driven by large outcomes - a small percentual error in predicting a large value, possibly due to noise, has a great impact on the squared error. This effect is tamed by the squared log error.
+where $\beta = (\beta_1,\dots,\beta_n)$ is a vector of regression parameters to be determined. We can determine the betas by maximizing likelihood.
 
-Loss functions are in principle fully customizable, but xgboost already provides a wide selection, including the negative of the likelihood to logistic, gamma and tweedie distributions. Minimizing the negative of the likelihood obviously maximizes the likelihood; this is however not achieved (as in GLMs) by finding the optimal betas, but by finding the best splits for each decision tree.
+This approach cannot be translated directly to decision trees, which describe the outcome $Y$ in term of piecewise constant functions rather than polynomials. But it is possible to introduce the likelihood in the computation via the loss function.
+
+The learning process of a machine learning algorithm is guided by minimizing a loss function. Given a vector of true values $Y$ and of model outcomes $\hat Y$ we can for example ask for the $\hat Y$ that minimizes the squared error $(\hat Y - Y)^2$ or the squared log error $\log\left(\frac{\hat Y +1}{Y + 1}\right)$. One typical issue of the squared error is that it is driven by large outcomes - a small percentual error in predicting a large value, possibly due to noise, has a great impact on the squared error. This effect is tamed by the squared log error. So we can choose different loss functions to target different peculiarities in the data and guide the learning process of the algorithm.
+
+Loss functions are in principle fully customizable, but xgboost already provides a wide selection, including the negative of the log likelihood to logistic, gamma and tweedie distributions with the $\log$ link function. Minimizing the negative of the likelihood obviously maximizes the likelihood; this is however not achieved (as in GLMs) by finding the optimal betas, but by finding the best splits for each decision tree.
+
+In practice, for a Gamma distribution with mean $\mu$ and shape parameter $k$ we have the density function
+$$
+f(x;k,\mu) = \frac{x^{k-1}e^{-\frac{xk}{\mu}}}{\Gamma(k)\left(\frac{\mu}{k}\right)^k}
+$$
+We can set the *objective* parameter of xgboost to *reg:gamma* to obtain the negative log likelihood as loss function:
+$$
+L(\hat Y,Y;k) = \sum_{i=1}^n\left[\log\Gamma(k_i) + \frac{Y_ik_i}{\hat Y_i} - k_i\log\left(\frac{Y_ik_i}{\hat Y_i}\right) - (k_i-1)\log(Y_i)\right]
+$$
+Here $k$ is interpreted as a weight parameter and defaults to 1. For details see the source code of xgboost at https://github.com/dmlc/xgboost/tree/master/src and the discussion at https://stats.stackexchange.com/questions/484555.
 
 ## Model analysis
 
@@ -109,25 +129,25 @@ With this remark in mind, we would like to proceed to an analysis of the model t
 
 From the plot we can see that the major improvement is given by inserting boosting. It should also be noted that unboosted models essentially do not make use of the NLP features and are not powerful enough to detect the distribution behind the data: for unboosted models the squared error is by far the best loss function, for boosted models it is outperformed by tweedie likelihood. 
 
-We also see this in Figure Y, which compares drop in RMSE after each boosting round for a model with squared error and tweedie likelihood loss function: this drop is much more regular for the squared error loss function, which is directly related to RMSE, and more of a side effect for the tweedie likelihood loss function. In the latter case the RMSE abruptly drops in the blue shaded area (boosting rounds 15 to 75) and then stabilizes again.
+We also see this in Figure Y, which compares drop in RMSE on the test set after each boosting round for a model with squared error and tweedie likelihood loss function: this drop is much more regular for the squared error loss function, which is directly related to RMSE, and more of a side effect for the tweedie likelihood loss function. In the latter case the RMSE abruptly drops in the blue shaded area (boosting rounds 15 to 75) and then stabilizes again.
 
 ![Boosting for different loss functions](https://raw.githubusercontent.com/naelvis/Kaggle-Presentation/main/Article/Plots/BoostingRounds.png)
 
 ### Backtesting
 
-The input data for the prediction contained an initial estimation for the ultimate cost. The model essentially took and refined this initial estimation using the remaining predictors.
+The input data for the prediction contained an initial estimation for the ultimate cost. The model essentially took and boosted this initial estimation using the remaining predictors.
 
 Figure Z shows the distribution of the logarithm of the ultimate for the initial estimation, the prediction and the true ultimate in the train data:
 
 ![Ultimate Comparison](https://raw.githubusercontent.com/naelvis/Kaggle-Presentation/main/Article/Plots/UltimateComparison.png)
 
-One of the main banes of this challenge was the prediction of large losses, which repeatedly led the model astray.
+One of the main banes of this challenge was the prediction of large losses, which repeatedly led the model astray: the fat tail of the real distribution shifts the core of the prediction distribution to the right, overestimating small values, but the fitted tail is still too thin to correctly predict large values. For our final submission we followed a hybrid approach, choosing a large loss threshold and combining our models differently for large and small losses.
 
 ## Conclusion
 
-This competition was a useful exercise in machine learning and its potential in the insurance industry. While very little hard coding was necessary, we realised how important it was to have a good grasp of the theory behind the models: choosing to use random forests only leads to up to many more questions, for example what the maximal depth of the trees should be, or how many trees the random forest should be made up of. Already choosing a range of hyperparameters has been at times challenging.
+This competition was a useful exercise in machine learning and its potential in the insurance industry. While very little hard coding was necessary, we realised how important it was to have a good grasp of the theory behind the models: choosing to use random forests only leads to up to many more questions, for example what the maximal depth of the trees should be, or how many trees the random forest should be made up of. Hyperparameters can be fine tuned automatically in Python e.g. using the Ray package, but already choosing a reasonable range of hyperparameters has been at times challenging.
 
-We also tried several different machine learning algorithms, including neural networks. While boosting on neural network is a known concept (see https://arxiv.org/abs/2002.07971v2, thanks to alfredo for the link), an equivalent of xgboost is missing. So it is well possible that powerful models remain unused just because they are hard to implement with the available packages.
+We also tried several different machine learning algorithms, including neural networks. While boosting on neural network is a known concept (see https://arxiv.org/abs/2002.07971v2, thanks to alfredo for the link), a ready-made package equivalent to xgboost is as far as we know missing. So it is well possible that powerful models remain unused just because they are hard to implement with the available packages.
 
-Interpretability of the results remained a problem throughout. We used feature importance as a guideline and spent a lot of time looking at what the model was missing to understand how to improve our results. A straightforward way of interpreting is still not available and is perhaps just not achievable, given the way ML algorithms are constructed. This remains an open challenge for the future.
+Interpretability of the results remained a problem throughout. We used feature importance as a guideline and spent time and energy looking at samples of what the model was missing to understand how to improve our results. A straightforward way of interpreting is still not available and is perhaps just not achievable, given the way ML algorithms are constructed. This remains an open challenge for the future.
 
