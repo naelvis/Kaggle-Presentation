@@ -60,11 +60,9 @@ Google Cloud's natural language API implements the most common techniques (see h
 
  In our case these techniques could not be fully made use of because on the one hand we only had short descriptions available, ruling out e.g. sentiment analysis, and on the other hand the descriptions had often been distorted to a point where the semantics of the language had become hardly recognizable, ruling out syntactic analysis. For instance, the description "TO RIGHT LEG RIGHT KNEE" is difficult to interpret.
 
-
-
 ## Modelling with xgboost
 
-We implemented our model in Python making use of the xgboost library. In the words of its own authors this library "implements machine learning algorithms under the Gradient Boosting framework", and we applied it to boost a random forest algorithm. 
+We implemented our model in Python making use of the xgboost package. In the words of its own authors this library "implements machine learning algorithms under the Gradient Boosting framework", and we applied it to boost a random forest algorithm. 
 
 In this section we shortly refresh the concepts of random forest and gradient boosting and then describe the way xgboost introduces probability distributions in its algorithms.
 
