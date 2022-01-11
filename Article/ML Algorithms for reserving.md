@@ -54,9 +54,13 @@ Different large claim thresholds were tested for different kinds of models. More
 
 ## Natural Language Processing
 
-The chapter is titled Natural Language Processing (NLP) because one of the most influential variable, the *ClaimDescription* was analyzed with NLP techniques. However, these techniques could not be fully made use of because in some cases the descriptions had been distorted to a point where the semantics of the language become hardly recognizable. For instance, the description "TO RIGHT LEG RIGHT KNEE" is difficult to interpret.
+The chapter is titled Natural Language Processing (NLP) because the *ClaimDescription* was analyzed in part with NLP techniques. However, the full potential of NLP techniques could not be exploited because some descriptions had been distorted for data protection reasons to a point where they became hardly intelligible, e.g. "TO RIGHT LEG RIGHT KNEE". Therefore, NLP was combined with simple text analysis to extract information from the claim descriptions.
 
+The descriptions were preprocessed as follows: First, stopwords were removed to reduce the noise in the data. The set of stopwords were taken from the nltk corpus. Second, the words were lemmatized using SpaCy, as well as stemmed using the SnowBall stemmer of nltk. Lemmatization reduces the word to its form that appears in the dictionary, stemming reduces the word to its root form. The former produces semantically meaningful word forms, whereas the latter may not. For example, the lemma of lacerated is lacerate, the stem form of lacerated, laceration or lacerate is lacer.
 
+Next, we introduced 3 categories: body part, type of wound, and accident cause. For each category we defined a list of words based on the dataset as well as our own judgment. The lists contained words like: ankle, knee, eye (body parts), strain, bruise, fracture (types of wound), slip, explosion, spider (accident cause). Moreover, we grouped these words based semantic similarity. For instance, face, cheek and jaw were clustered together.
+
+For each word in the lists as well as for each cluster, a new column was created and added to the dataset. The columns contained the number of occurences of the word or cluster(?).
 
 ## Modelling with xgboost
 
