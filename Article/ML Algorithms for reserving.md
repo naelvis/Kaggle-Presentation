@@ -73,7 +73,7 @@ Here is a short recap of the concepts of random forests and gradient boosting:
 - **Random forests** are made up of decision trees - hence the "forest" -, each of which is only allowed to train on a casually selected subset of the training set - hence the "random". Each of the decision trees populating the forest predicts a result, and a unique result is then provided by taking the average of all results (for regression problems) or the most common one (for classification problems).
 - **Gradient boosting** is a machine learning technique in which the same algorithm is applied iteratively. After a first prediction has been provided, we fit a new model on its residuals - this is the first boosting round. We can then combine the first two models and model their residuals, which would be the second boosting round, and so forth.
 
-In combining random forests and gradient boosting we refine the classic decision tree algorithm in two different ways. The predictions improve at the cost of interpretability: building up a forest we lose the possibility of looking at the individual splits of our decision tree, and each boosting round adds a new forest. A simple way of visualizing feature importance is the F-score, which counts how many times a variable was split on (see Figure X).
+In combining random forests and gradient boosting we refine the classic decision tree algorithm in two different ways. The predictions improve at the cost of interpretability: building up a forest we lose the possibility of looking at the individual splits of our decision tree, and each boosting round adds a new forest. A simple way of visualizing feature importance is the F-score, which counts how many times a variable was split on.
 
 ### Regression to distributions in xgboost
 
@@ -103,21 +103,25 @@ Here $k$ is interpreted as a weight parameter and defaults to 1. For details see
 
 An xgboost model can be quite complex. These are some of the parameters that need to be set, with some sample values:
 
-    'objective':'reg:gamma,
-    'eval_metric':'rmse',
-    'eta': 5e-2,
-    'max_depth': 4,
-    'min_child_weight': 6,
-    'subsample': 0.7,
-    'num_parallel_trees': 50
-    'alpha' : 2e+2
+```python
+'objective':'reg:gamma,
+'eval_metric':'rmse',
+'eta': 5e-2,
+'max_depth': 4,
+'min_child_weight': 6,
+'subsample': 0.7,
+'num_parallel_trees': 50
+'alpha' : 2e+2
+```
 
 For a description and complete list of parameters, please see the official documentation at https://xgboost.readthedocs.io/en/latest/parameter.html. We still need to choose how many boosting rounds we would like to perform, then we can train a model as follows (Python):
 
-```
+```python
 import xgboost as xgb
 xgb.train(params=parameters, dtrain=xgb.DMatrix(input_data, label=y), num_boost_round=300)
 ```
+
+### Model comparison
 
 It is important to understand that the parameters interact with each other, and several optimal configurations might be possible. Moreover, the data is usually preprocessed to make it easier for the model to interpret: the preprocessing and feature engineering performed on the data interacts with the hyperparameter as well, so that the final model is much more than a simple sum of input data and hyperparameters.
 
