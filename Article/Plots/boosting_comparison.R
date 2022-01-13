@@ -29,18 +29,38 @@ boost_plot <- input %>%
                                     "Squared Error",
                                     "Tweedie\nLikelihood"))
 
-  ggplot(boost_plot, aes(x = x1, y = test_rmse_mean, color = source)) +
-    geom_line() +
-    xlim(c(0, 200)) +
-    annotate("rect",
-             xmin = 15,
-             xmax = 75,
-             ymin = min(boost_plot$test_rmse_mean),
-             ymax = max(boost_plot$test_rmse_mean),
-             alpha = .1,
-             fill = "blue") +
-    labs(color = "Loss Function",
-         x = "Boosting round",
-         y = "RMSE",
-         title = "Boosting for different loss functions")
-  
+ggplot(boost_plot, aes(x = x1, y = test_rmse_mean, color = source)) +
+  geom_line() +
+  xlim(c(0, 200)) +
+  annotate("rect",
+           xmin = 15,
+           xmax = 75,
+           ymin = min(boost_plot$test_rmse_mean),
+           ymax = max(boost_plot$test_rmse_mean),
+           alpha = .1,
+           fill = "blue") +
+  labs(color = "Loss Function",
+       x = "Boosting round",
+       y = "RMSE",
+       title = "Boosting for different loss functions")
+
+ppi <-300
+png("BoostingRounds.png",
+    width = 4*ppi,
+    height = 4*ppi,
+    res = ppi)
+ggplot(boost_plot, aes(x = x1, y = test_rmse_mean, color = source)) +
+  geom_line() +
+  xlim(c(0, 200)) +
+  annotate("rect",
+           xmin = 15,
+           xmax = 75,
+           ymin = min(boost_plot$test_rmse_mean),
+           ymax = max(boost_plot$test_rmse_mean),
+           alpha = .1,
+           fill = "blue") +
+  labs(color = "Loss Function",
+       x = "Boosting round",
+       y = "RMSE",
+       title = "Boosting for different loss functions")
+dev.off()  
