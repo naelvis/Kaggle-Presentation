@@ -64,6 +64,12 @@ Next, we introduced 3 categories: body part, type of wound, and accident cause. 
 
 For each word in the lists, a new column was created and added to the dataset. The columns contained the number of occurences of the word in the claim descriptions. For each cluster, a new column was created as well. The value of these columns were 1 if any of the words in the cluster appeared at least once in the claim description, otherwise 0. All these numeric columns representing the claim descriptions were given as inputs to the model.
 
+The workflow is summarised in the picture for two claim descriptions:
+
+![NLP Workflow](https://raw.githubusercontent.com/naelvis/Kaggle-Presentation/main/Article/Plots/NLP_Flow.png)
+
+Clustering and stemming make sure that the model can detect the common aspect of the two description, i.e. a laceration on the claimant's hand, while differentiating its cause (respectively pulling something and a bite) and retaining more specific information.
+
 ## Modelling with xgboost
 
 We implemented our model in Python making use of the xgboost package. In the words of its own authors this library "implements machine learning algorithms under the Gradient Boosting framework", and we applied it to boost a random forest algorithm. 
