@@ -4,6 +4,9 @@ library(magrittr)
 library(vroom)
 library(janitor)
 library(ggplot2)
+library(lubridate)
+library(viridis)
+library(scales)
 
 # Input
 setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
@@ -186,3 +189,67 @@ ggplot(ultimates_v7, aes(x = Value)) +
   geom_line(stat = "density") +
   xlim(0, 50000)+
   facet_grid(Type~.)
+
+gesamtschaden <- original_ultimates %>% 
+  mutate(Accident_Year = year(DateTimeOfAccident),
+         Sign = str_detect(ClaimDescription, "BACK")) %>% 
+  group_by(Accident_Year) %>% 
+  summarise(Total_Ultimate = sum(UltimateIncurredClaimCost),
+            Total_Prediction = sum(Prediction),
+            Total_Sign = sum(Sign),
+            Total = n()) %>% 
+  mutate(Error = (Total_Ultimate - Total_Prediction),
+         Error_Percent = abs(Error)/Total_Ultimate,
+         Sign_Percent = abs(Total_Sign)/Total)
+
+ppi <- 300
+png("TotalError.png",
+    width = 4*ppi,
+    height = 4*ppi,
+    res = ppi)
+ggplot(gesamtschaden, aes(x = as.factor(Accident_Year), y = (Error_Percent))) +
+  geom_line(group= 0, aes(color = Total_Ultimate)) +
+  geom_point(aes(color = Total_Ultimate, size = Total_Prediction)) +
+  labs(x="Accident year",
+       y ="Error (%)",
+       title = "Percentual error on the yearly ultimate",
+       color = "Total Ultimate",
+       size = "Total Prediction")+
+  guides(size = guide_legend(reverse = TRUE)) +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
+  scale_color_viridis_c(labels = comma) +
+  scale_size_continuous(labels = comma) +
+  scale_y_continuous(labels = percent)
+dev.off()
+
+ggplot(gesamtschaden, aes(x = as.factor(Accident_Year), y = ((Error)))) +
+  geom_line(group= 0, aes(color = Total_Ultimate)) +
+  geom_point(aes(color = Total_Ultimate, size = Total_Prediction)) +
+  labs(x="Accident year",
+       y ="Error",
+       title = "Percentual error on the yearly ultimate",
+       color = "Total Ultimate",
+       size = "Total Prediction")+
+  guides(size = guide_legend(reverse = TRUE)) +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
+  scale_color_viridis_c(labels = comma) +
+  scale_size_continuous(labels = comma) +
+  scale_y_continuous(labels = comma)
+
+gesamtschaden_v2 <- original_ultimates %>% 
+  mutate(Accident_Year = year(DateTimeOfAccident),
+         Sign = sign(UltimateIncurredClaimCost - Prediction),
+         Error = UltimateIncurredClaimCost - Prediction)
+
+ggplot(gesamtschaden_v2, aes(x = as.factor(Accident_Year), y = Error)) +
+  geom_violin()
+
+ggplot(gesamtschaden_v2, aes(x = log(UltimateIncurredClaimCost), fill =as.factor(Sign))) +
+  geom_histogram(position = "dodge")
+
+cor_jahr <- function(jahr) {
+  a <- filter(gesamtschaden_v2, Accident_Year == jahr)
+  cor(a$UltimateIncurredClaimCost, a$InitialIncurredCalimsCost)
+}
