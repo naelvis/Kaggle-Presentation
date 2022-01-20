@@ -253,3 +253,10 @@ cor_jahr <- function(jahr) {
   a <- filter(gesamtschaden_v2, Accident_Year == jahr)
   cor(a$UltimateIncurredClaimCost, a$InitialIncurredCalimsCost)
 }
+
+ggplot(arrange(gesamtschaden_v2,desc(Error)), aes(x = as.factor(Accident_Year), y = (UltimateIncurredClaimCost), fill = ClaimNumber)) +
+  geom_col(color = "black") +
+  theme(legend.position = "none")
+
+ggplot(gesamtschaden_v2, aes(x = (Accident_Year), y = (Error))) +
+  geom_point()
