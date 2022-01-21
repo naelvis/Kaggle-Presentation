@@ -6,7 +6,8 @@ library(janitor)
 library(ggplot2)
 
 # Input
-setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
+# setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
+setwd("D:/Attila/DataScience/kaggle/actuarial_loss_prediction/presentation/Kaggle-Presentation/Article/Plots/")
 
 input <- "./data" %>% 
   list.files(full.names = TRUE) %>% 

@@ -6,7 +6,8 @@ library(janitor)
 library(ggplot2)
 
 # Input
-setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
+# setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
+setwd("D:/Attila/DataScience/kaggle/actuarial_loss_prediction/presentation/Kaggle-Presentation/Article/Plots/")
 
 input <- "./data" %>% 
   list.files(full.names = TRUE) %>% 
@@ -62,5 +63,6 @@ ggplot(boost_plot, aes(x = x1, y = test_rmse_mean, color = source)) +
   labs(color = "Loss Function",
        x = "Boosting round",
        y = "RMSE",
-       title = "Boosting for different loss functions")
+       title = "Boosting for different loss functions") +
+  theme(legend.position="bottom", legend.title = element_blank())
 dev.off()  
