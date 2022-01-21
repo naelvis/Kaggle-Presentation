@@ -9,7 +9,8 @@ library(viridis)
 library(scales)
 
 # Input
-setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
+# setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
+setwd("D:/Attila/DataScience/kaggle/actuarial_loss_prediction/presentation/Kaggle-Presentation/Article/Plots/")
 
 predictions <- read_csv("./Backtesting/submission_20211230T113132.csv") %>% 
   rename(Prediction = UltimateIncurredClaimCost)
@@ -212,9 +213,9 @@ ggplot(gesamtschaden, aes(x = as.factor(Accident_Year), y = (Error_Percent))) +
   geom_point(aes(color = Total_Ultimate, size = Total_Prediction)) +
   labs(x="Accident year",
        y ="Error (%)",
-       title = "Percentual error on the yearly ultimate",
-       color = "Total Ultimate",
-       size = "Total Prediction")+
+       title = "Prediction error (%) of the ultimate claim per accident year",
+       color = "Ultimate",
+       size = "Prediction")+
   guides(size = guide_legend(reverse = TRUE)) +
   theme(plot.title = element_text(hjust = 0.5),
         axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
