@@ -9,8 +9,8 @@ library(viridis)
 library(scales)
 
 # Input
-# setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
-setwd("D:/Attila/DataScience/kaggle/actuarial_loss_prediction/presentation/Kaggle-Presentation/Article/Plots/")
+ setwd("/Users/nelvis/Documents/R/Kaggle ALP Presentation/Kaggle-Presentation/Article/Plots")
+#setwd("D:/Attila/DataScience/kaggle/actuarial_loss_prediction/presentation/Kaggle-Presentation/Article/Plots/")
 
 predictions <- read_csv("./Backtesting/submission_20211230T113132.csv") %>% 
   rename(Prediction = UltimateIncurredClaimCost)
