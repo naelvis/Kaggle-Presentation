@@ -169,6 +169,47 @@ ggplot(ultimates_v7, aes(x = log(Value))) +
        title = "Comparison of the ultimates")+
   theme(plot.title = element_text(hjust = 0.5))
 
+ultimates_v7a <- original_ultimates %>% 
+  select(UltimateIncurredClaimCost, ClaimDescription) %>% 
+  mutate(back = str_detect(ClaimDescription, "BACK")) %>% 
+  mutate(Total_Ultimate = UltimateIncurredClaimCost,
+         Total_Back = Total_Ultimate*back,
+         Total_nonBack = Total_Ultimate*(1-back)) %>% 
+  select(-c(UltimateIncurredClaimCost,ClaimDescription, back)) %>% 
+  pivot_longer(c(Total_Ultimate, Total_Back, Total_nonBack),
+               names_to = "Type",
+               values_to = "Value") %>% 
+  mutate(Source = ifelse(Type == "Total_Ultimate",
+                       "Original",
+                       "Differentiating Back injuries"))
+
+ggplot(ultimates_v7a, aes(x = (Value))) +
+  geom_density(aes(fill = Type), alpha = .5) +
+#  geom_line(stat = "density") +
+  xlim(1, 20000)+
+  facet_wrap(.~Source, scales = "free") +
+  guides(fill = "none") +
+  labs(x="Logarithm of the ultimate",
+       y ="Density",
+       title = "Comparison of the ultimates")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+ppi <- 300
+png("UltimateComparison_back.png",
+    width = 3120,
+    height = 1200,
+    res = ppi)
+ggplot(ultimates_v7a, aes(x = (Value))) +
+  geom_density(aes(fill = Type), alpha = .5) +
+  xlim(1, 20000)+
+  facet_wrap(.~Source, scales = "free") +
+  guides(fill = "none") +
+  labs(x="Logarithm of the ultimate",
+       y ="Density",
+       title = "Comparison of the ultimates")+
+  theme(plot.title = element_text(hjust = 0.5))
+dev.off()
+
 ppi <- 300
 png("UltimateComparison.png",
     width = 4*ppi,
