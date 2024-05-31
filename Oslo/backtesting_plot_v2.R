@@ -430,8 +430,9 @@ ggplot(ultimates_v7b, aes(x = (Value))) +
   xlim(1, 20000)+
   facet_wrap(.~Source) +
   #guides(fill = "none") +
+  guides(fill = guide_legend(reverse = TRUE)) +
   scale_fill_manual(values = c("Total Ultimate" = "#737111", "Does not contain the word 'Back'" = "#A65200", "Contains the word 'Back'" = "#B49056")) +
-  labs(x="Logarithm of the ultimate",
+  labs(x="Ultimate",
        y ="Density",
        title = "Comparison of the ultimates")+
   theme_minimal() +
@@ -445,9 +446,26 @@ ggplot(ultimates_v7b, aes(x = (Value))) +
         panel.background = element_rect(fill = "#EAEBE3"),
        legend.position = "bottom") 
 
-claimdesc_density <- original_ultimates %>% 
-  group_by(ClaimDescription) %>% 
-  summarise(count = n()) 
+ggplot(filter(gesamtschaden_v3, Accident_Year %in% seq(1980,2015)), aes(x = as.factor(Accident_Year), y = (Value), group = Ultimate, fill = Ultimate)) +
+  geom_bar(stat = "identity", position = "dodge", alpha = 1) +
+  labs(x="Accident year",
+       y ="Ultimate Value",
+       title = "Ultimate per accident year",
+       color = "Ultimate",
+       size = "Prediction")+
+  guides(size = guide_legend(reverse = TRUE)) +
+  scale_fill_manual(values = c("Predicted" = "#56758A", "Real" = "#DF690B")) +
+  scale_size_continuous(labels = comma) +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),
+        #axis.text.y = element_blank(),  # Remove y-axis text/labels
+        # axis.ticks.y = element_blank(),
+        text = element_text(color = "#737111"),
+        axis.text = element_text(color = "#737111"),
+        strip.text = element_text(color = "#737111"),
+        plot.background = element_rect(fill = "#EAEBE3"),
+        panel.background = element_rect(fill = "#EAEBE3"),
+        legend.position = "bottom") 
 
-ggplot(claimdesc_density, aes(y = 1, x = log10(count))) +
-  geom_boxplot()
